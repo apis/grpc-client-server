@@ -1,0 +1,8 @@
+bin
+obj
+output
+*.suo
+*.user
+*.bak
+*.GhostDoc.xml
+.vs

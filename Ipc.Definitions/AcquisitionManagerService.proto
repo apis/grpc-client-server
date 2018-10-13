@@ -1,0 +1,63 @@
+syntax = "proto3";
+
+option csharp_namespace = "Ipc.Definitions";
+
+package ipc_definitions;
+
+service AcquisitionManagerService {
+	rpc Start (StartRequest) returns (StartReply) {}
+	rpc Stop (StopRequest) returns (StopReply) {}
+	rpc CurrentSampleName (CurrentSampleNameRequest) returns (stream CurrentSampleNameReply) {}
+	rpc AcquisitionState (AcquisitionStateRequest) returns (stream AcquisitionStateReply) {}
+	rpc AcquisitionCompletionState (AcquisitionCompletionStateRequest) returns (stream AcquisitionCompletionStateReply) {}
+}
+
+message StartRequest {
+	string sampleName = 1;
+}
+
+message StopRequest {
+}
+
+message StartReply {
+	bool result = 1;
+}
+
+message StopReply {
+	bool result = 1;
+}
+
+message CurrentSampleNameRequest {
+}
+
+message CurrentSampleNameReply {
+	string currentSampleName = 1;
+}
+
+message AcquisitionStateRequest {
+}
+
+message AcquisitionStateReply {
+
+	enum AcquisitionStateEnum {
+		IDLE = 0;
+		RUNNING = 1;
+	}
+
+	AcquisitionStateEnum acquisitionStateEnum = 1;
+}
+
+message AcquisitionCompletionStateRequest {
+}
+
+message AcquisitionCompletionStateReply {
+
+	enum AcquisitionCompletionStateEnum {
+		INCOMPLETE = 0;
+		STOPPED = 1;
+		FAILED = 2;
+		SUCCESSFULLY_COMPLETED = 3;
+	}
+
+	AcquisitionCompletionStateEnum acquisitionCompletionStateEnum = 1;
+}
