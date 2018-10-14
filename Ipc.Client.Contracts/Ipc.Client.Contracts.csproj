@@ -4,17 +4,16 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{DC040620-6C9B-492B-8245-32FDD6517404}</ProjectGuid>
-    <OutputType>Exe</OutputType>
-    <RootNamespace>Client</RootNamespace>
-    <AssemblyName>Client</AssemblyName>
+    <ProjectGuid>{3FEA55F8-0955-4A86-9B16-6EDC47EB0340}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Ipc.Client</RootNamespace>
+    <AssemblyName>Ipc.Client.Contracts</AssemblyName>
     <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -24,7 +23,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>..\output\bin\Release\</OutputPath>
@@ -43,25 +41,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Program.cs" />
+    <Compile Include="IIpcClient.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\AcquisitionManager.Contracts\AcquisitionManager.Contracts.csproj">
-      <Project>{b8b3d8f5-4a66-445c-932c-90004a3a81b4}</Project>
-      <Name>AcquisitionManager.Contracts</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Ipc.Client.Contracts\Ipc.Client.Contracts.csproj">
-      <Project>{3fea55f8-0955-4a86-9b16-6edc47eb0340}</Project>
-      <Name>Ipc.Client.Contracts</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Ipc.Client.Implementation\Ipc.Client.Implementation.csproj">
-      <Project>{5619a831-2348-4d6c-9928-bc160391c464}</Project>
-      <Name>Ipc.Client.Implementation</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
