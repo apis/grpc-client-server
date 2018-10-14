@@ -1,15 +1,19 @@
 ﻿using System;
+using System.Reflection;
 using System.Threading;
 using AcquisitionManager;
 using Google.Protobuf.WellKnownTypes;
 using Grpc.Core;
 using Ipc.Definitions;
+using log4net;
 using Enum = System.Enum;
 
 namespace Ipc.Client
 {
 	public class AcquisitionManagerProxyImplementation : IAcquisitionManager
 	{
+		private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+
 		private readonly AcquisitionManagerService.AcquisitionManagerServiceClient _acquisitionManagerServiceClient;
 
 		public AcquisitionManagerProxyImplementation(object channel)
@@ -24,14 +28,14 @@ namespace Ipc.Client
 		public bool Start(string sampleName)
 		{
 			var startReply = _acquisitionManagerServiceClient.Start(new StartRequest {SampleName = sampleName});
-			Console.WriteLine("Start() => " + startReply.Result);
+			Log.DebugFormat("Start({0}) => {1}", sampleName, startReply.Result);
 			return startReply.Result;
 		}
 
 		public bool Stop()
 		{
 			var stopReply = _acquisitionManagerServiceClient.Stop(new StopRequest());
-			Console.WriteLine("Stop() => " + stopReply.Result);
+			Log.DebugFormat("Stop() => {0}", stopReply.Result);
 			return stopReply.Result;
 		}
 
@@ -41,7 +45,7 @@ namespace Ipc.Client
 			{
 				var currentSampleNameReply =
 					_acquisitionManagerServiceClient.GetCurrentSampleName(new Empty());
-				PrintCurrentSampleName(currentSampleNameReply.CurrentSampleName);
+				Log.DebugFormat("get CurrentSampleName: {0}", currentSampleNameReply.CurrentSampleName);
 				return currentSampleNameReply.CurrentSampleName;
 			}
 		}
@@ -55,7 +59,7 @@ namespace Ipc.Client
 				var acquisitionState =
 					ConvertToAcquisitionState(acquisitionStateReply.AcquisitionStateEnum);
 
-				PrintAcquisitionState(acquisitionState);
+				Log.DebugFormat("get AcquisitionState: {0}", acquisitionState);
 
 				return acquisitionState;
 			}
@@ -70,7 +74,9 @@ namespace Ipc.Client
 						new Empty());
 				var acquisitionCompletionState =
 					ConvertToAcquisitionCompletionState(acquisitionCompletionStateReply.AcquisitionCompletionStateEnum);
-				PrintAcquisitionCompletionState(acquisitionCompletionState);
+
+				Log.DebugFormat("get AcquisitionCompletionState: {0}", acquisitionCompletionState);
+
 				return acquisitionCompletionState;
 			}
 		}
@@ -92,7 +98,7 @@ namespace Ipc.Client
 					while (await responseStream.MoveNext(default(CancellationToken)))
 					{
 						var currentSampleNameReply = responseStream.Current;
-						PrintCurrentSampleName(currentSampleNameReply.CurrentSampleName);
+						Log.DebugFormat("event CurrentSampleName: {0}", currentSampleNameReply.CurrentSampleName);
 						CurrentSampleNameEvent?.Invoke(this,
 							new EventArgs<string>(currentSampleNameReply.CurrentSampleName));
 					}
@@ -100,13 +106,8 @@ namespace Ipc.Client
 			}
 			catch (RpcException exception)
 			{
-				Console.WriteLine("Exception => " + exception.Message);
+				Log.Error("event CurrentSampleName", exception);
 			}
-		}
-
-		private static void PrintCurrentSampleName(string currentSampleName)
-		{
-			Console.WriteLine("CurrentSampleName => " + currentSampleName);
 		}
 
 		public async void GetAcquisitionStateAsync(
@@ -123,20 +124,17 @@ namespace Ipc.Client
 						var acquisitionStateReply = responseStream.Current;
 						var acquisitionState =
 							ConvertToAcquisitionState(acquisitionStateReply.AcquisitionStateEnum);
-						PrintAcquisitionState(acquisitionState);
+
+						Log.DebugFormat("event AcquisitionState: {0}", acquisitionState);
+
 						AcquisitionStateEvent?.Invoke(this, new EventArgs<AcquisitionState>(acquisitionState));
 					}
 				}
 			}
 			catch (RpcException exception)
 			{
-				Console.WriteLine("Exception => " + exception.Message);
+				Log.Error("event AcquisitionState", exception);
 			}
-		}
-
-		private static void PrintAcquisitionState(AcquisitionState acquisitionState)
-		{
-			Console.WriteLine("AcquisitionState => " + acquisitionState);
 		}
 
 		public async void AcquisitionCompletionStateAsync(
@@ -157,7 +155,7 @@ namespace Ipc.Client
 							ConvertToAcquisitionCompletionState(acquisitionCompletionStateReply
 								.AcquisitionCompletionStateEnum);
 
-						PrintAcquisitionCompletionState(acquisitionCompletionState);
+						Log.DebugFormat("event AcquisitionCompletionState: {0}", acquisitionCompletionState);
 
 						AcquisitionCompletionStateEvent?.Invoke(this,
 							new EventArgs<AcquisitionCompletionState>(acquisitionCompletionState));
@@ -166,14 +164,8 @@ namespace Ipc.Client
 			}
 			catch (RpcException exception)
 			{
-				Console.WriteLine("Exception => " + exception.Message);
+				Log.Error("event AcquisitionCompletionState", exception);
 			}
-		}
-
-		private static void PrintAcquisitionCompletionState(
-			AcquisitionCompletionState acquisitionCompletionState)
-		{
-			Console.WriteLine("AcquisitionCompletionState => " + acquisitionCompletionState);
 		}
 
 		private static AcquisitionCompletionState
