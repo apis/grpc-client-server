@@ -25,46 +25,47 @@ namespace Ipc.Definitions {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
             "Ch9BY3F1aXNpdGlvbk1hbmFnZXJTZXJ2aWNlLnByb3RvEg9pcGNfZGVmaW5p",
-            "dGlvbnMiIgoMU3RhcnRSZXF1ZXN0EhIKCnNhbXBsZU5hbWUYASABKAkiDQoL",
-            "U3RvcFJlcXVlc3QiHAoKU3RhcnRSZXBseRIOCgZyZXN1bHQYASABKAgiGwoJ",
-            "U3RvcFJlcGx5Eg4KBnJlc3VsdBgBIAEoCCIaChhDdXJyZW50U2FtcGxlTmFt",
-            "ZVJlcXVlc3QiMwoWQ3VycmVudFNhbXBsZU5hbWVSZXBseRIZChFjdXJyZW50",
-            "U2FtcGxlTmFtZRgBIAEoCSIZChdBY3F1aXNpdGlvblN0YXRlUmVxdWVzdCKh",
-            "AQoVQWNxdWlzaXRpb25TdGF0ZVJlcGx5ElkKFGFjcXVpc2l0aW9uU3RhdGVF",
-            "bnVtGAEgASgOMjsuaXBjX2RlZmluaXRpb25zLkFjcXVpc2l0aW9uU3RhdGVS",
-            "ZXBseS5BY3F1aXNpdGlvblN0YXRlRW51bSItChRBY3F1aXNpdGlvblN0YXRl",
-            "RW51bRIICgRJRExFEAASCwoHUlVOTklORxABIiMKIUFjcXVpc2l0aW9uQ29t",
-            "cGxldGlvblN0YXRlUmVxdWVzdCKBAgofQWNxdWlzaXRpb25Db21wbGV0aW9u",
-            "U3RhdGVSZXBseRJ3Ch5hY3F1aXNpdGlvbkNvbXBsZXRpb25TdGF0ZUVudW0Y",
-            "ASABKA4yTy5pcGNfZGVmaW5pdGlvbnMuQWNxdWlzaXRpb25Db21wbGV0aW9u",
-            "U3RhdGVSZXBseS5BY3F1aXNpdGlvbkNvbXBsZXRpb25TdGF0ZUVudW0iZQoe",
-            "QWNxdWlzaXRpb25Db21wbGV0aW9uU3RhdGVFbnVtEg4KCklOQ09NUExFVEUQ",
-            "ABILCgdTVE9QUEVEEAESCgoGRkFJTEVEEAISGgoWU1VDQ0VTU0ZVTExZX0NP",
-            "TVBMRVRFRBADMoYEChlBY3F1aXNpdGlvbk1hbmFnZXJTZXJ2aWNlEkUKBVN0",
-            "YXJ0Eh0uaXBjX2RlZmluaXRpb25zLlN0YXJ0UmVxdWVzdBobLmlwY19kZWZp",
-            "bml0aW9ucy5TdGFydFJlcGx5IgASQgoEU3RvcBIcLmlwY19kZWZpbml0aW9u",
-            "cy5TdG9wUmVxdWVzdBoaLmlwY19kZWZpbml0aW9ucy5TdG9wUmVwbHkiABJr",
-            "ChFDdXJyZW50U2FtcGxlTmFtZRIpLmlwY19kZWZpbml0aW9ucy5DdXJyZW50",
-            "U2FtcGxlTmFtZVJlcXVlc3QaJy5pcGNfZGVmaW5pdGlvbnMuQ3VycmVudFNh",
-            "bXBsZU5hbWVSZXBseSIAMAESaAoQQWNxdWlzaXRpb25TdGF0ZRIoLmlwY19k",
-            "ZWZpbml0aW9ucy5BY3F1aXNpdGlvblN0YXRlUmVxdWVzdBomLmlwY19kZWZp",
-            "bml0aW9ucy5BY3F1aXNpdGlvblN0YXRlUmVwbHkiADABEoYBChpBY3F1aXNp",
-            "dGlvbkNvbXBsZXRpb25TdGF0ZRIyLmlwY19kZWZpbml0aW9ucy5BY3F1aXNp",
-            "dGlvbkNvbXBsZXRpb25TdGF0ZVJlcXVlc3QaMC5pcGNfZGVmaW5pdGlvbnMu",
-            "QWNxdWlzaXRpb25Db21wbGV0aW9uU3RhdGVSZXBseSIAMAFCEqoCD0lwYy5E",
-            "ZWZpbml0aW9uc2IGcHJvdG8z"));
+            "dGlvbnMaG2dvb2dsZS9wcm90b2J1Zi9lbXB0eS5wcm90byIiCgxTdGFydFJl",
+            "cXVlc3QSEgoKc2FtcGxlTmFtZRgBIAEoCSINCgtTdG9wUmVxdWVzdCIcCgpT",
+            "dGFydFJlcGx5Eg4KBnJlc3VsdBgBIAEoCCIbCglTdG9wUmVwbHkSDgoGcmVz",
+            "dWx0GAEgASgIIjMKFkN1cnJlbnRTYW1wbGVOYW1lUmVwbHkSGQoRY3VycmVu",
+            "dFNhbXBsZU5hbWUYASABKAkioQEKFUFjcXVpc2l0aW9uU3RhdGVSZXBseRJZ",
+            "ChRhY3F1aXNpdGlvblN0YXRlRW51bRgBIAEoDjI7LmlwY19kZWZpbml0aW9u",
+            "cy5BY3F1aXNpdGlvblN0YXRlUmVwbHkuQWNxdWlzaXRpb25TdGF0ZUVudW0i",
+            "LQoUQWNxdWlzaXRpb25TdGF0ZUVudW0SCAoESURMRRAAEgsKB1JVTk5JTkcQ",
+            "ASKBAgofQWNxdWlzaXRpb25Db21wbGV0aW9uU3RhdGVSZXBseRJ3Ch5hY3F1",
+            "aXNpdGlvbkNvbXBsZXRpb25TdGF0ZUVudW0YASABKA4yTy5pcGNfZGVmaW5p",
+            "dGlvbnMuQWNxdWlzaXRpb25Db21wbGV0aW9uU3RhdGVSZXBseS5BY3F1aXNp",
+            "dGlvbkNvbXBsZXRpb25TdGF0ZUVudW0iZQoeQWNxdWlzaXRpb25Db21wbGV0",
+            "aW9uU3RhdGVFbnVtEg4KCklOQ09NUExFVEUQABILCgdTVE9QUEVEEAESCgoG",
+            "RkFJTEVEEAISGgoWU1VDQ0VTU0ZVTExZX0NPTVBMRVRFRBADMoAGChlBY3F1",
+            "aXNpdGlvbk1hbmFnZXJTZXJ2aWNlEkUKBVN0YXJ0Eh0uaXBjX2RlZmluaXRp",
+            "b25zLlN0YXJ0UmVxdWVzdBobLmlwY19kZWZpbml0aW9ucy5TdGFydFJlcGx5",
+            "IgASQgoEU3RvcBIcLmlwY19kZWZpbml0aW9ucy5TdG9wUmVxdWVzdBoaLmlw",
+            "Y19kZWZpbml0aW9ucy5TdG9wUmVwbHkiABJZChRHZXRDdXJyZW50U2FtcGxl",
+            "TmFtZRIWLmdvb2dsZS5wcm90b2J1Zi5FbXB0eRonLmlwY19kZWZpbml0aW9u",
+            "cy5DdXJyZW50U2FtcGxlTmFtZVJlcGx5IgASYQoaR2V0Q3VycmVudFNhbXBs",
+            "ZU5hbWVTdHJlYW0SFi5nb29nbGUucHJvdG9idWYuRW1wdHkaJy5pcGNfZGVm",
+            "aW5pdGlvbnMuQ3VycmVudFNhbXBsZU5hbWVSZXBseSIAMAESVwoTR2V0QWNx",
+            "dWlzaXRpb25TdGF0ZRIWLmdvb2dsZS5wcm90b2J1Zi5FbXB0eRomLmlwY19k",
+            "ZWZpbml0aW9ucy5BY3F1aXNpdGlvblN0YXRlUmVwbHkiABJfChlHZXRBY3F1",
+            "aXNpdGlvblN0YXRlU3RyZWFtEhYuZ29vZ2xlLnByb3RvYnVmLkVtcHR5GiYu",
+            "aXBjX2RlZmluaXRpb25zLkFjcXVpc2l0aW9uU3RhdGVSZXBseSIAMAESawod",
+            "R2V0QWNxdWlzaXRpb25Db21wbGV0aW9uU3RhdGUSFi5nb29nbGUucHJvdG9i",
+            "dWYuRW1wdHkaMC5pcGNfZGVmaW5pdGlvbnMuQWNxdWlzaXRpb25Db21wbGV0",
+            "aW9uU3RhdGVSZXBseSIAEnMKI0dldEFjcXVpc2l0aW9uQ29tcGxldGlvblN0",
+            "YXRlU3RyZWFtEhYuZ29vZ2xlLnByb3RvYnVmLkVtcHR5GjAuaXBjX2RlZmlu",
+            "aXRpb25zLkFjcXVpc2l0aW9uQ29tcGxldGlvblN0YXRlUmVwbHkiADABQhKq",
+            "Ag9JcGMuRGVmaW5pdGlvbnNiBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
-          new pbr::FileDescriptor[] { },
+          new pbr::FileDescriptor[] { global::Google.Protobuf.WellKnownTypes.EmptyReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
             new pbr::GeneratedClrTypeInfo(typeof(global::Ipc.Definitions.StartRequest), global::Ipc.Definitions.StartRequest.Parser, new[]{ "SampleName" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Ipc.Definitions.StopRequest), global::Ipc.Definitions.StopRequest.Parser, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Ipc.Definitions.StartReply), global::Ipc.Definitions.StartReply.Parser, new[]{ "Result" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Ipc.Definitions.StopReply), global::Ipc.Definitions.StopReply.Parser, new[]{ "Result" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Ipc.Definitions.CurrentSampleNameRequest), global::Ipc.Definitions.CurrentSampleNameRequest.Parser, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Ipc.Definitions.CurrentSampleNameReply), global::Ipc.Definitions.CurrentSampleNameReply.Parser, new[]{ "CurrentSampleName" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Ipc.Definitions.AcquisitionStateRequest), global::Ipc.Definitions.AcquisitionStateRequest.Parser, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Ipc.Definitions.AcquisitionStateReply), global::Ipc.Definitions.AcquisitionStateReply.Parser, new[]{ "AcquisitionStateEnum" }, null, new[]{ typeof(global::Ipc.Definitions.AcquisitionStateReply.Types.AcquisitionStateEnum) }, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Ipc.Definitions.AcquisitionCompletionStateRequest), global::Ipc.Definitions.AcquisitionCompletionStateRequest.Parser, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Ipc.Definitions.AcquisitionCompletionStateReply), global::Ipc.Definitions.AcquisitionCompletionStateReply.Parser, new[]{ "AcquisitionCompletionStateEnum" }, null, new[]{ typeof(global::Ipc.Definitions.AcquisitionCompletionStateReply.Types.AcquisitionCompletionStateEnum) }, null)
           }));
     }
@@ -560,107 +561,6 @@ namespace Ipc.Definitions {
 
   }
 
-  public sealed partial class CurrentSampleNameRequest : pb::IMessage<CurrentSampleNameRequest> {
-    private static readonly pb::MessageParser<CurrentSampleNameRequest> _parser = new pb::MessageParser<CurrentSampleNameRequest>(() => new CurrentSampleNameRequest());
-    private pb::UnknownFieldSet _unknownFields;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pb::MessageParser<CurrentSampleNameRequest> Parser { get { return _parser; } }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pbr::MessageDescriptor Descriptor {
-      get { return global::Ipc.Definitions.AcquisitionManagerServiceReflection.Descriptor.MessageTypes[4]; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    pbr::MessageDescriptor pb::IMessage.Descriptor {
-      get { return Descriptor; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public CurrentSampleNameRequest() {
-      OnConstruction();
-    }
-
-    partial void OnConstruction();
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public CurrentSampleNameRequest(CurrentSampleNameRequest other) : this() {
-      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public CurrentSampleNameRequest Clone() {
-      return new CurrentSampleNameRequest(this);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override bool Equals(object other) {
-      return Equals(other as CurrentSampleNameRequest);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public bool Equals(CurrentSampleNameRequest other) {
-      if (ReferenceEquals(other, null)) {
-        return false;
-      }
-      if (ReferenceEquals(other, this)) {
-        return true;
-      }
-      return Equals(_unknownFields, other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override int GetHashCode() {
-      int hash = 1;
-      if (_unknownFields != null) {
-        hash ^= _unknownFields.GetHashCode();
-      }
-      return hash;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override string ToString() {
-      return pb::JsonFormatter.ToDiagnosticString(this);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void WriteTo(pb::CodedOutputStream output) {
-      if (_unknownFields != null) {
-        _unknownFields.WriteTo(output);
-      }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int CalculateSize() {
-      int size = 0;
-      if (_unknownFields != null) {
-        size += _unknownFields.CalculateSize();
-      }
-      return size;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(CurrentSampleNameRequest other) {
-      if (other == null) {
-        return;
-      }
-      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(pb::CodedInputStream input) {
-      uint tag;
-      while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
-          default:
-            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
-            break;
-        }
-      }
-    }
-
-  }
-
   public sealed partial class CurrentSampleNameReply : pb::IMessage<CurrentSampleNameReply> {
     private static readonly pb::MessageParser<CurrentSampleNameReply> _parser = new pb::MessageParser<CurrentSampleNameReply>(() => new CurrentSampleNameReply());
     private pb::UnknownFieldSet _unknownFields;
@@ -669,7 +569,7 @@ namespace Ipc.Definitions {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Ipc.Definitions.AcquisitionManagerServiceReflection.Descriptor.MessageTypes[5]; }
+      get { return global::Ipc.Definitions.AcquisitionManagerServiceReflection.Descriptor.MessageTypes[4]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -790,107 +690,6 @@ namespace Ipc.Definitions {
 
   }
 
-  public sealed partial class AcquisitionStateRequest : pb::IMessage<AcquisitionStateRequest> {
-    private static readonly pb::MessageParser<AcquisitionStateRequest> _parser = new pb::MessageParser<AcquisitionStateRequest>(() => new AcquisitionStateRequest());
-    private pb::UnknownFieldSet _unknownFields;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pb::MessageParser<AcquisitionStateRequest> Parser { get { return _parser; } }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pbr::MessageDescriptor Descriptor {
-      get { return global::Ipc.Definitions.AcquisitionManagerServiceReflection.Descriptor.MessageTypes[6]; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    pbr::MessageDescriptor pb::IMessage.Descriptor {
-      get { return Descriptor; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public AcquisitionStateRequest() {
-      OnConstruction();
-    }
-
-    partial void OnConstruction();
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public AcquisitionStateRequest(AcquisitionStateRequest other) : this() {
-      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public AcquisitionStateRequest Clone() {
-      return new AcquisitionStateRequest(this);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override bool Equals(object other) {
-      return Equals(other as AcquisitionStateRequest);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public bool Equals(AcquisitionStateRequest other) {
-      if (ReferenceEquals(other, null)) {
-        return false;
-      }
-      if (ReferenceEquals(other, this)) {
-        return true;
-      }
-      return Equals(_unknownFields, other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override int GetHashCode() {
-      int hash = 1;
-      if (_unknownFields != null) {
-        hash ^= _unknownFields.GetHashCode();
-      }
-      return hash;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override string ToString() {
-      return pb::JsonFormatter.ToDiagnosticString(this);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void WriteTo(pb::CodedOutputStream output) {
-      if (_unknownFields != null) {
-        _unknownFields.WriteTo(output);
-      }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int CalculateSize() {
-      int size = 0;
-      if (_unknownFields != null) {
-        size += _unknownFields.CalculateSize();
-      }
-      return size;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(AcquisitionStateRequest other) {
-      if (other == null) {
-        return;
-      }
-      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(pb::CodedInputStream input) {
-      uint tag;
-      while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
-          default:
-            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
-            break;
-        }
-      }
-    }
-
-  }
-
   public sealed partial class AcquisitionStateReply : pb::IMessage<AcquisitionStateReply> {
     private static readonly pb::MessageParser<AcquisitionStateReply> _parser = new pb::MessageParser<AcquisitionStateReply>(() => new AcquisitionStateReply());
     private pb::UnknownFieldSet _unknownFields;
@@ -899,7 +698,7 @@ namespace Ipc.Definitions {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Ipc.Definitions.AcquisitionManagerServiceReflection.Descriptor.MessageTypes[7]; }
+      get { return global::Ipc.Definitions.AcquisitionManagerServiceReflection.Descriptor.MessageTypes[5]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -1032,107 +831,6 @@ namespace Ipc.Definitions {
 
   }
 
-  public sealed partial class AcquisitionCompletionStateRequest : pb::IMessage<AcquisitionCompletionStateRequest> {
-    private static readonly pb::MessageParser<AcquisitionCompletionStateRequest> _parser = new pb::MessageParser<AcquisitionCompletionStateRequest>(() => new AcquisitionCompletionStateRequest());
-    private pb::UnknownFieldSet _unknownFields;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pb::MessageParser<AcquisitionCompletionStateRequest> Parser { get { return _parser; } }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pbr::MessageDescriptor Descriptor {
-      get { return global::Ipc.Definitions.AcquisitionManagerServiceReflection.Descriptor.MessageTypes[8]; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    pbr::MessageDescriptor pb::IMessage.Descriptor {
-      get { return Descriptor; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public AcquisitionCompletionStateRequest() {
-      OnConstruction();
-    }
-
-    partial void OnConstruction();
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public AcquisitionCompletionStateRequest(AcquisitionCompletionStateRequest other) : this() {
-      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public AcquisitionCompletionStateRequest Clone() {
-      return new AcquisitionCompletionStateRequest(this);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override bool Equals(object other) {
-      return Equals(other as AcquisitionCompletionStateRequest);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public bool Equals(AcquisitionCompletionStateRequest other) {
-      if (ReferenceEquals(other, null)) {
-        return false;
-      }
-      if (ReferenceEquals(other, this)) {
-        return true;
-      }
-      return Equals(_unknownFields, other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override int GetHashCode() {
-      int hash = 1;
-      if (_unknownFields != null) {
-        hash ^= _unknownFields.GetHashCode();
-      }
-      return hash;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public override string ToString() {
-      return pb::JsonFormatter.ToDiagnosticString(this);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void WriteTo(pb::CodedOutputStream output) {
-      if (_unknownFields != null) {
-        _unknownFields.WriteTo(output);
-      }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int CalculateSize() {
-      int size = 0;
-      if (_unknownFields != null) {
-        size += _unknownFields.CalculateSize();
-      }
-      return size;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(AcquisitionCompletionStateRequest other) {
-      if (other == null) {
-        return;
-      }
-      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(pb::CodedInputStream input) {
-      uint tag;
-      while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
-          default:
-            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
-            break;
-        }
-      }
-    }
-
-  }
-
   public sealed partial class AcquisitionCompletionStateReply : pb::IMessage<AcquisitionCompletionStateReply> {
     private static readonly pb::MessageParser<AcquisitionCompletionStateReply> _parser = new pb::MessageParser<AcquisitionCompletionStateReply>(() => new AcquisitionCompletionStateReply());
     private pb::UnknownFieldSet _unknownFields;
@@ -1141,7 +839,7 @@ namespace Ipc.Definitions {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Ipc.Definitions.AcquisitionManagerServiceReflection.Descriptor.MessageTypes[9]; }
+      get { return global::Ipc.Definitions.AcquisitionManagerServiceReflection.Descriptor.MessageTypes[6]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]

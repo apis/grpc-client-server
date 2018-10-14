@@ -18,7 +18,7 @@ namespace AcquisitionManager
 			lock (_padLock)
 			{
 				SetAcquisitionState(AcquisitionState.Idle);
-				SetAcquisitionCompletionState(AcquisitionCompletionState.SuccessfullyCompleted);
+				SetAcquisitionCompletionState(AcquisitionCompletionState.Failed);
 				SetCurrentSampleName(string.Empty);
 			}
 		}

@@ -16,11 +16,9 @@ namespace Ipc.Definitions {
     static readonly grpc::Marshaller<global::Ipc.Definitions.StartReply> __Marshaller_ipc_definitions_StartReply = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Ipc.Definitions.StartReply.Parser.ParseFrom);
     static readonly grpc::Marshaller<global::Ipc.Definitions.StopRequest> __Marshaller_ipc_definitions_StopRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Ipc.Definitions.StopRequest.Parser.ParseFrom);
     static readonly grpc::Marshaller<global::Ipc.Definitions.StopReply> __Marshaller_ipc_definitions_StopReply = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Ipc.Definitions.StopReply.Parser.ParseFrom);
-    static readonly grpc::Marshaller<global::Ipc.Definitions.CurrentSampleNameRequest> __Marshaller_ipc_definitions_CurrentSampleNameRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Ipc.Definitions.CurrentSampleNameRequest.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Google.Protobuf.WellKnownTypes.Empty> __Marshaller_google_protobuf_Empty = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Google.Protobuf.WellKnownTypes.Empty.Parser.ParseFrom);
     static readonly grpc::Marshaller<global::Ipc.Definitions.CurrentSampleNameReply> __Marshaller_ipc_definitions_CurrentSampleNameReply = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Ipc.Definitions.CurrentSampleNameReply.Parser.ParseFrom);
-    static readonly grpc::Marshaller<global::Ipc.Definitions.AcquisitionStateRequest> __Marshaller_ipc_definitions_AcquisitionStateRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Ipc.Definitions.AcquisitionStateRequest.Parser.ParseFrom);
     static readonly grpc::Marshaller<global::Ipc.Definitions.AcquisitionStateReply> __Marshaller_ipc_definitions_AcquisitionStateReply = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Ipc.Definitions.AcquisitionStateReply.Parser.ParseFrom);
-    static readonly grpc::Marshaller<global::Ipc.Definitions.AcquisitionCompletionStateRequest> __Marshaller_ipc_definitions_AcquisitionCompletionStateRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Ipc.Definitions.AcquisitionCompletionStateRequest.Parser.ParseFrom);
     static readonly grpc::Marshaller<global::Ipc.Definitions.AcquisitionCompletionStateReply> __Marshaller_ipc_definitions_AcquisitionCompletionStateReply = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Ipc.Definitions.AcquisitionCompletionStateReply.Parser.ParseFrom);
 
     static readonly grpc::Method<global::Ipc.Definitions.StartRequest, global::Ipc.Definitions.StartReply> __Method_Start = new grpc::Method<global::Ipc.Definitions.StartRequest, global::Ipc.Definitions.StartReply>(
@@ -37,25 +35,46 @@ namespace Ipc.Definitions {
         __Marshaller_ipc_definitions_StopRequest,
         __Marshaller_ipc_definitions_StopReply);
 
-    static readonly grpc::Method<global::Ipc.Definitions.CurrentSampleNameRequest, global::Ipc.Definitions.CurrentSampleNameReply> __Method_CurrentSampleName = new grpc::Method<global::Ipc.Definitions.CurrentSampleNameRequest, global::Ipc.Definitions.CurrentSampleNameReply>(
-        grpc::MethodType.ServerStreaming,
+    static readonly grpc::Method<global::Google.Protobuf.WellKnownTypes.Empty, global::Ipc.Definitions.CurrentSampleNameReply> __Method_GetCurrentSampleName = new grpc::Method<global::Google.Protobuf.WellKnownTypes.Empty, global::Ipc.Definitions.CurrentSampleNameReply>(
+        grpc::MethodType.Unary,
         __ServiceName,
-        "CurrentSampleName",
-        __Marshaller_ipc_definitions_CurrentSampleNameRequest,
+        "GetCurrentSampleName",
+        __Marshaller_google_protobuf_Empty,
         __Marshaller_ipc_definitions_CurrentSampleNameReply);
 
-    static readonly grpc::Method<global::Ipc.Definitions.AcquisitionStateRequest, global::Ipc.Definitions.AcquisitionStateReply> __Method_AcquisitionState = new grpc::Method<global::Ipc.Definitions.AcquisitionStateRequest, global::Ipc.Definitions.AcquisitionStateReply>(
+    static readonly grpc::Method<global::Google.Protobuf.WellKnownTypes.Empty, global::Ipc.Definitions.CurrentSampleNameReply> __Method_GetCurrentSampleNameStream = new grpc::Method<global::Google.Protobuf.WellKnownTypes.Empty, global::Ipc.Definitions.CurrentSampleNameReply>(
         grpc::MethodType.ServerStreaming,
         __ServiceName,
-        "AcquisitionState",
-        __Marshaller_ipc_definitions_AcquisitionStateRequest,
+        "GetCurrentSampleNameStream",
+        __Marshaller_google_protobuf_Empty,
+        __Marshaller_ipc_definitions_CurrentSampleNameReply);
+
+    static readonly grpc::Method<global::Google.Protobuf.WellKnownTypes.Empty, global::Ipc.Definitions.AcquisitionStateReply> __Method_GetAcquisitionState = new grpc::Method<global::Google.Protobuf.WellKnownTypes.Empty, global::Ipc.Definitions.AcquisitionStateReply>(
+        grpc::MethodType.Unary,
+        __ServiceName,
+        "GetAcquisitionState",
+        __Marshaller_google_protobuf_Empty,
         __Marshaller_ipc_definitions_AcquisitionStateReply);
 
-    static readonly grpc::Method<global::Ipc.Definitions.AcquisitionCompletionStateRequest, global::Ipc.Definitions.AcquisitionCompletionStateReply> __Method_AcquisitionCompletionState = new grpc::Method<global::Ipc.Definitions.AcquisitionCompletionStateRequest, global::Ipc.Definitions.AcquisitionCompletionStateReply>(
+    static readonly grpc::Method<global::Google.Protobuf.WellKnownTypes.Empty, global::Ipc.Definitions.AcquisitionStateReply> __Method_GetAcquisitionStateStream = new grpc::Method<global::Google.Protobuf.WellKnownTypes.Empty, global::Ipc.Definitions.AcquisitionStateReply>(
         grpc::MethodType.ServerStreaming,
         __ServiceName,
-        "AcquisitionCompletionState",
-        __Marshaller_ipc_definitions_AcquisitionCompletionStateRequest,
+        "GetAcquisitionStateStream",
+        __Marshaller_google_protobuf_Empty,
+        __Marshaller_ipc_definitions_AcquisitionStateReply);
+
+    static readonly grpc::Method<global::Google.Protobuf.WellKnownTypes.Empty, global::Ipc.Definitions.AcquisitionCompletionStateReply> __Method_GetAcquisitionCompletionState = new grpc::Method<global::Google.Protobuf.WellKnownTypes.Empty, global::Ipc.Definitions.AcquisitionCompletionStateReply>(
+        grpc::MethodType.Unary,
+        __ServiceName,
+        "GetAcquisitionCompletionState",
+        __Marshaller_google_protobuf_Empty,
+        __Marshaller_ipc_definitions_AcquisitionCompletionStateReply);
+
+    static readonly grpc::Method<global::Google.Protobuf.WellKnownTypes.Empty, global::Ipc.Definitions.AcquisitionCompletionStateReply> __Method_GetAcquisitionCompletionStateStream = new grpc::Method<global::Google.Protobuf.WellKnownTypes.Empty, global::Ipc.Definitions.AcquisitionCompletionStateReply>(
+        grpc::MethodType.ServerStreaming,
+        __ServiceName,
+        "GetAcquisitionCompletionStateStream",
+        __Marshaller_google_protobuf_Empty,
         __Marshaller_ipc_definitions_AcquisitionCompletionStateReply);
 
     /// <summary>Service descriptor</summary>
@@ -77,17 +96,32 @@ namespace Ipc.Definitions {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
 
-      public virtual global::System.Threading.Tasks.Task CurrentSampleName(global::Ipc.Definitions.CurrentSampleNameRequest request, grpc::IServerStreamWriter<global::Ipc.Definitions.CurrentSampleNameReply> responseStream, grpc::ServerCallContext context)
+      public virtual global::System.Threading.Tasks.Task<global::Ipc.Definitions.CurrentSampleNameReply> GetCurrentSampleName(global::Google.Protobuf.WellKnownTypes.Empty request, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
 
-      public virtual global::System.Threading.Tasks.Task AcquisitionState(global::Ipc.Definitions.AcquisitionStateRequest request, grpc::IServerStreamWriter<global::Ipc.Definitions.AcquisitionStateReply> responseStream, grpc::ServerCallContext context)
+      public virtual global::System.Threading.Tasks.Task GetCurrentSampleNameStream(global::Google.Protobuf.WellKnownTypes.Empty request, grpc::IServerStreamWriter<global::Ipc.Definitions.CurrentSampleNameReply> responseStream, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
 
-      public virtual global::System.Threading.Tasks.Task AcquisitionCompletionState(global::Ipc.Definitions.AcquisitionCompletionStateRequest request, grpc::IServerStreamWriter<global::Ipc.Definitions.AcquisitionCompletionStateReply> responseStream, grpc::ServerCallContext context)
+      public virtual global::System.Threading.Tasks.Task<global::Ipc.Definitions.AcquisitionStateReply> GetAcquisitionState(global::Google.Protobuf.WellKnownTypes.Empty request, grpc::ServerCallContext context)
+      {
+        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
+      }
+
+      public virtual global::System.Threading.Tasks.Task GetAcquisitionStateStream(global::Google.Protobuf.WellKnownTypes.Empty request, grpc::IServerStreamWriter<global::Ipc.Definitions.AcquisitionStateReply> responseStream, grpc::ServerCallContext context)
+      {
+        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
+      }
+
+      public virtual global::System.Threading.Tasks.Task<global::Ipc.Definitions.AcquisitionCompletionStateReply> GetAcquisitionCompletionState(global::Google.Protobuf.WellKnownTypes.Empty request, grpc::ServerCallContext context)
+      {
+        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
+      }
+
+      public virtual global::System.Threading.Tasks.Task GetAcquisitionCompletionStateStream(global::Google.Protobuf.WellKnownTypes.Empty request, grpc::IServerStreamWriter<global::Ipc.Definitions.AcquisitionCompletionStateReply> responseStream, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
@@ -149,29 +183,77 @@ namespace Ipc.Definitions {
       {
         return CallInvoker.AsyncUnaryCall(__Method_Stop, null, options, request);
       }
-      public virtual grpc::AsyncServerStreamingCall<global::Ipc.Definitions.CurrentSampleNameReply> CurrentSampleName(global::Ipc.Definitions.CurrentSampleNameRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      public virtual global::Ipc.Definitions.CurrentSampleNameReply GetCurrentSampleName(global::Google.Protobuf.WellKnownTypes.Empty request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
-        return CurrentSampleName(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+        return GetCurrentSampleName(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
-      public virtual grpc::AsyncServerStreamingCall<global::Ipc.Definitions.CurrentSampleNameReply> CurrentSampleName(global::Ipc.Definitions.CurrentSampleNameRequest request, grpc::CallOptions options)
+      public virtual global::Ipc.Definitions.CurrentSampleNameReply GetCurrentSampleName(global::Google.Protobuf.WellKnownTypes.Empty request, grpc::CallOptions options)
       {
-        return CallInvoker.AsyncServerStreamingCall(__Method_CurrentSampleName, null, options, request);
+        return CallInvoker.BlockingUnaryCall(__Method_GetCurrentSampleName, null, options, request);
       }
-      public virtual grpc::AsyncServerStreamingCall<global::Ipc.Definitions.AcquisitionStateReply> AcquisitionState(global::Ipc.Definitions.AcquisitionStateRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      public virtual grpc::AsyncUnaryCall<global::Ipc.Definitions.CurrentSampleNameReply> GetCurrentSampleNameAsync(global::Google.Protobuf.WellKnownTypes.Empty request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
-        return AcquisitionState(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+        return GetCurrentSampleNameAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
-      public virtual grpc::AsyncServerStreamingCall<global::Ipc.Definitions.AcquisitionStateReply> AcquisitionState(global::Ipc.Definitions.AcquisitionStateRequest request, grpc::CallOptions options)
+      public virtual grpc::AsyncUnaryCall<global::Ipc.Definitions.CurrentSampleNameReply> GetCurrentSampleNameAsync(global::Google.Protobuf.WellKnownTypes.Empty request, grpc::CallOptions options)
       {
-        return CallInvoker.AsyncServerStreamingCall(__Method_AcquisitionState, null, options, request);
+        return CallInvoker.AsyncUnaryCall(__Method_GetCurrentSampleName, null, options, request);
       }
-      public virtual grpc::AsyncServerStreamingCall<global::Ipc.Definitions.AcquisitionCompletionStateReply> AcquisitionCompletionState(global::Ipc.Definitions.AcquisitionCompletionStateRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      public virtual grpc::AsyncServerStreamingCall<global::Ipc.Definitions.CurrentSampleNameReply> GetCurrentSampleNameStream(global::Google.Protobuf.WellKnownTypes.Empty request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
-        return AcquisitionCompletionState(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+        return GetCurrentSampleNameStream(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
-      public virtual grpc::AsyncServerStreamingCall<global::Ipc.Definitions.AcquisitionCompletionStateReply> AcquisitionCompletionState(global::Ipc.Definitions.AcquisitionCompletionStateRequest request, grpc::CallOptions options)
+      public virtual grpc::AsyncServerStreamingCall<global::Ipc.Definitions.CurrentSampleNameReply> GetCurrentSampleNameStream(global::Google.Protobuf.WellKnownTypes.Empty request, grpc::CallOptions options)
       {
-        return CallInvoker.AsyncServerStreamingCall(__Method_AcquisitionCompletionState, null, options, request);
+        return CallInvoker.AsyncServerStreamingCall(__Method_GetCurrentSampleNameStream, null, options, request);
+      }
+      public virtual global::Ipc.Definitions.AcquisitionStateReply GetAcquisitionState(global::Google.Protobuf.WellKnownTypes.Empty request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return GetAcquisitionState(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      public virtual global::Ipc.Definitions.AcquisitionStateReply GetAcquisitionState(global::Google.Protobuf.WellKnownTypes.Empty request, grpc::CallOptions options)
+      {
+        return CallInvoker.BlockingUnaryCall(__Method_GetAcquisitionState, null, options, request);
+      }
+      public virtual grpc::AsyncUnaryCall<global::Ipc.Definitions.AcquisitionStateReply> GetAcquisitionStateAsync(global::Google.Protobuf.WellKnownTypes.Empty request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return GetAcquisitionStateAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      public virtual grpc::AsyncUnaryCall<global::Ipc.Definitions.AcquisitionStateReply> GetAcquisitionStateAsync(global::Google.Protobuf.WellKnownTypes.Empty request, grpc::CallOptions options)
+      {
+        return CallInvoker.AsyncUnaryCall(__Method_GetAcquisitionState, null, options, request);
+      }
+      public virtual grpc::AsyncServerStreamingCall<global::Ipc.Definitions.AcquisitionStateReply> GetAcquisitionStateStream(global::Google.Protobuf.WellKnownTypes.Empty request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return GetAcquisitionStateStream(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      public virtual grpc::AsyncServerStreamingCall<global::Ipc.Definitions.AcquisitionStateReply> GetAcquisitionStateStream(global::Google.Protobuf.WellKnownTypes.Empty request, grpc::CallOptions options)
+      {
+        return CallInvoker.AsyncServerStreamingCall(__Method_GetAcquisitionStateStream, null, options, request);
+      }
+      public virtual global::Ipc.Definitions.AcquisitionCompletionStateReply GetAcquisitionCompletionState(global::Google.Protobuf.WellKnownTypes.Empty request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return GetAcquisitionCompletionState(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      public virtual global::Ipc.Definitions.AcquisitionCompletionStateReply GetAcquisitionCompletionState(global::Google.Protobuf.WellKnownTypes.Empty request, grpc::CallOptions options)
+      {
+        return CallInvoker.BlockingUnaryCall(__Method_GetAcquisitionCompletionState, null, options, request);
+      }
+      public virtual grpc::AsyncUnaryCall<global::Ipc.Definitions.AcquisitionCompletionStateReply> GetAcquisitionCompletionStateAsync(global::Google.Protobuf.WellKnownTypes.Empty request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return GetAcquisitionCompletionStateAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      public virtual grpc::AsyncUnaryCall<global::Ipc.Definitions.AcquisitionCompletionStateReply> GetAcquisitionCompletionStateAsync(global::Google.Protobuf.WellKnownTypes.Empty request, grpc::CallOptions options)
+      {
+        return CallInvoker.AsyncUnaryCall(__Method_GetAcquisitionCompletionState, null, options, request);
+      }
+      public virtual grpc::AsyncServerStreamingCall<global::Ipc.Definitions.AcquisitionCompletionStateReply> GetAcquisitionCompletionStateStream(global::Google.Protobuf.WellKnownTypes.Empty request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return GetAcquisitionCompletionStateStream(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      public virtual grpc::AsyncServerStreamingCall<global::Ipc.Definitions.AcquisitionCompletionStateReply> GetAcquisitionCompletionStateStream(global::Google.Protobuf.WellKnownTypes.Empty request, grpc::CallOptions options)
+      {
+        return CallInvoker.AsyncServerStreamingCall(__Method_GetAcquisitionCompletionStateStream, null, options, request);
       }
       /// <summary>Creates a new instance of client from given <c>ClientBaseConfiguration</c>.</summary>
       protected override AcquisitionManagerServiceClient NewInstance(ClientBaseConfiguration configuration)
@@ -187,9 +269,12 @@ namespace Ipc.Definitions {
       return grpc::ServerServiceDefinition.CreateBuilder()
           .AddMethod(__Method_Start, serviceImpl.Start)
           .AddMethod(__Method_Stop, serviceImpl.Stop)
-          .AddMethod(__Method_CurrentSampleName, serviceImpl.CurrentSampleName)
-          .AddMethod(__Method_AcquisitionState, serviceImpl.AcquisitionState)
-          .AddMethod(__Method_AcquisitionCompletionState, serviceImpl.AcquisitionCompletionState).Build();
+          .AddMethod(__Method_GetCurrentSampleName, serviceImpl.GetCurrentSampleName)
+          .AddMethod(__Method_GetCurrentSampleNameStream, serviceImpl.GetCurrentSampleNameStream)
+          .AddMethod(__Method_GetAcquisitionState, serviceImpl.GetAcquisitionState)
+          .AddMethod(__Method_GetAcquisitionStateStream, serviceImpl.GetAcquisitionStateStream)
+          .AddMethod(__Method_GetAcquisitionCompletionState, serviceImpl.GetAcquisitionCompletionState)
+          .AddMethod(__Method_GetAcquisitionCompletionStateStream, serviceImpl.GetAcquisitionCompletionStateStream).Build();
     }
 
   }

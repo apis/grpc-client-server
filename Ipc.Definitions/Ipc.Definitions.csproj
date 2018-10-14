@@ -49,6 +49,9 @@
     <PackageReference Include="Google.Protobuf">
       <Version>3.6.1</Version>
     </PackageReference>
+    <PackageReference Include="Google.Protobuf.Tools">
+      <Version>3.6.1</Version>
+    </PackageReference>
     <PackageReference Include="Grpc">
       <Version>1.15.0</Version>
     </PackageReference>

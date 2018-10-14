@@ -1,6 +1,5 @@
 using System;
 using System.Threading;
-using System.Threading.Tasks;
 using Grpc.Core;
 using Ipc.Definitions;
 
@@ -13,14 +12,21 @@ namespace Client
 			var channel = new Channel("127.0.0.1:11972", ChannelCredentials.Insecure);
 
 			var client = new AcquisitionManagerService.AcquisitionManagerServiceClient(channel);
-			var sampleName = "remote_sample_007";
 
 			GetCurrentSampleNameAsync(client);
-			AcquisitionStateAsync(client);
+			GetAcquisitionStateAsync(client);
 			AcquisitionCompletionStateAsync(client);
 
-			Thread.Sleep(1000);
+			var currentSampleNameReply = client.GetCurrentSampleName(new Google.Protobuf.WellKnownTypes.Empty());
+			PrintCurrentSampleName(currentSampleNameReply.CurrentSampleName);
 
+			var acquisitionStateReply = client.GetAcquisitionState(new Google.Protobuf.WellKnownTypes.Empty());
+			PrintAcquisitionState(acquisitionStateReply.AcquisitionStateEnum);
+
+			var acquisitionCompletionStateReply = client.GetAcquisitionCompletionState(new Google.Protobuf.WellKnownTypes.Empty());
+			PrintAcquisitionCompletionState(acquisitionCompletionStateReply.AcquisitionCompletionStateEnum);
+
+			var sampleName = "remote_sample_007";
 			var reply = client.Start(new StartRequest { SampleName = sampleName });
 			Console.WriteLine("Start() => " + reply.Result);
 
@@ -31,18 +37,18 @@ namespace Client
 			Console.ReadKey();
 		}
 
-		public static async Task GetCurrentSampleNameAsync(AcquisitionManagerService.AcquisitionManagerServiceClient client)
+		public static async void GetCurrentSampleNameAsync(AcquisitionManagerService.AcquisitionManagerServiceClient client)
 		{
 			try
 			{
-				using (var call = client.CurrentSampleName(new CurrentSampleNameRequest()))
+				using (var call = client.GetCurrentSampleNameStream(new Google.Protobuf.WellKnownTypes.Empty()))
 				{
 					var responseStream = call.ResponseStream;
 
 					while (await responseStream.MoveNext(default(CancellationToken)))
 					{
 						var currentSampleNameReply = responseStream.Current;
-						Console.WriteLine("CurrentSampleName => " + currentSampleNameReply.CurrentSampleName);
+						PrintCurrentSampleName(currentSampleNameReply.CurrentSampleName);
 					}
 				}
 			}
@@ -52,18 +58,23 @@ namespace Client
 			}
 		}
 
-		public static async Task AcquisitionStateAsync(AcquisitionManagerService.AcquisitionManagerServiceClient client)
+		private static void PrintCurrentSampleName(string currentSampleName)
+		{
+			Console.WriteLine("CurrentSampleName => " + currentSampleName);
+		}
+
+		public static async void GetAcquisitionStateAsync(AcquisitionManagerService.AcquisitionManagerServiceClient client)
 		{
 			try
 			{
-				using (var call = client.AcquisitionState(new AcquisitionStateRequest()))
+				using (var call = client.GetAcquisitionStateStream(new Google.Protobuf.WellKnownTypes.Empty()))
 				{
 					var responseStream = call.ResponseStream;
 
 					while (await responseStream.MoveNext(default(CancellationToken)))
 					{
 						var acquisitionStateReply = responseStream.Current;
-						Console.WriteLine("AcquisitionState => " + acquisitionStateReply.AcquisitionStateEnum);
+						PrintAcquisitionState(acquisitionStateReply.AcquisitionStateEnum);
 					}
 				}
 			}
@@ -73,18 +84,23 @@ namespace Client
 			}
 		}
 
-		public static async Task AcquisitionCompletionStateAsync(AcquisitionManagerService.AcquisitionManagerServiceClient client)
+		private static void PrintAcquisitionState(AcquisitionStateReply.Types.AcquisitionStateEnum acquisitionStateEnum)
+		{
+			Console.WriteLine("AcquisitionState => " + acquisitionStateEnum);
+		}
+
+		public static async void AcquisitionCompletionStateAsync(AcquisitionManagerService.AcquisitionManagerServiceClient client)
 		{
 			try
 			{
-				using (var call = client.AcquisitionCompletionState(new AcquisitionCompletionStateRequest()))
+				using (var call = client.GetAcquisitionCompletionStateStream(new Google.Protobuf.WellKnownTypes.Empty()))
 				{
 					var responseStream = call.ResponseStream;
 
 					while (await responseStream.MoveNext(default(CancellationToken)))
 					{
 						var acquisitionCompletionStateReply = responseStream.Current;
-						Console.WriteLine("AcquisitionCompletionState => " + acquisitionCompletionStateReply.AcquisitionCompletionStateEnum);
+						PrintAcquisitionCompletionState(acquisitionCompletionStateReply.AcquisitionCompletionStateEnum);
 					}
 				}
 			}
@@ -92,6 +108,11 @@ namespace Client
 			{
 				Console.WriteLine("Exception => " + exception.Message);
 			}
+		}
+
+		private static void PrintAcquisitionCompletionState(AcquisitionCompletionStateReply.Types.AcquisitionCompletionStateEnum acquisitionCompletionStateEnum)
+		{
+			Console.WriteLine("AcquisitionCompletionState => " + acquisitionCompletionStateEnum);
 		}
 	}
 }

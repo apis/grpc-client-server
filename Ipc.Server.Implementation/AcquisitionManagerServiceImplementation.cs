@@ -3,8 +3,10 @@ using System.Collections.Concurrent;
 using System.Threading;
 using System.Threading.Tasks;
 using AcquisitionManager;
+using Google.Protobuf.WellKnownTypes;
 using Grpc.Core;
 using Ipc.Definitions;
+using Enum = System.Enum;
 
 namespace Ipc.Server
 {
@@ -37,23 +39,39 @@ namespace Ipc.Server
 		private async void OnAcquisitionCompletionStateAsync(object sender,
 			EventArgs<AcquisitionCompletionState> eventArgs)
 		{
-			var acquisitionCompletionStateEnum =
-				(AcquisitionCompletionStateReply.Types.AcquisitionCompletionStateEnum) Enum.Parse(
-					typeof(AcquisitionCompletionStateReply.Types.AcquisitionCompletionStateEnum),
-					eventArgs.Parameter.ToString());
+			var acquisitionCompletionStateEnum = ConvertToAcquisitionCompletionStateEnum(eventArgs.Parameter);
 
 			await ResponseStreamEventHandler(_acquisitionCompletionStateDictionary,
 				new AcquisitionCompletionStateReply {AcquisitionCompletionStateEnum = acquisitionCompletionStateEnum});
 		}
 
+		private static AcquisitionCompletionStateReply.Types.AcquisitionCompletionStateEnum
+			ConvertToAcquisitionCompletionStateEnum(AcquisitionCompletionState acquisitionCompletionState)
+		{
+			var acquisitionCompletionStateEnum =
+				(AcquisitionCompletionStateReply.Types.AcquisitionCompletionStateEnum) Enum.Parse(
+					typeof(AcquisitionCompletionStateReply.Types.AcquisitionCompletionStateEnum),
+					acquisitionCompletionState.ToString());
+
+			return acquisitionCompletionStateEnum;
+		}
+
 		private async void OnAcquisitionStateEventAsync(object sender, EventArgs<AcquisitionState> eventArgs)
 		{
-			var acquisitionStateEnum = (AcquisitionStateReply.Types.AcquisitionStateEnum) Enum.Parse(
-				typeof(AcquisitionStateReply.Types.AcquisitionStateEnum),
-				eventArgs.Parameter.ToString());
+			var acquisitionStateEnum = ConvertToAcquisitionStateEnum(eventArgs.Parameter);
 
 			await ResponseStreamEventHandler(_acquisitionStateDictionary,
 				new AcquisitionStateReply {AcquisitionStateEnum = acquisitionStateEnum});
+		}
+
+		private static AcquisitionStateReply.Types.AcquisitionStateEnum ConvertToAcquisitionStateEnum(
+			AcquisitionState acquisitionState)
+		{
+			var acquisitionStateEnum = (AcquisitionStateReply.Types.AcquisitionStateEnum) Enum.Parse(
+				typeof(AcquisitionStateReply.Types.AcquisitionStateEnum),
+				acquisitionState.ToString());
+
+			return acquisitionStateEnum;
 		}
 
 		private async void OnCurrentSampleNameEventAsync(object sender, EventArgs<string> eventArgs)
@@ -72,36 +90,24 @@ namespace Ipc.Server
 			return Task.FromResult(new StopReply {Result = _acquisitionManager.Stop()});
 		}
 
-		public override async Task CurrentSampleName(CurrentSampleNameRequest request,
+		public override async Task GetCurrentSampleNameStream(Empty request,
 			IServerStreamWriter<CurrentSampleNameReply> responseStream, ServerCallContext context)
 		{
 			await ResponseStreamHandler(responseStream, context.CancellationToken,
-				_currentSampleNameDictionary,
-				new CurrentSampleNameReply {CurrentSampleName = _acquisitionManager.CurrentSampleName});
+				_currentSampleNameDictionary);
 		}
 
-		public override async Task AcquisitionState(AcquisitionStateRequest request,
+		public override async Task GetAcquisitionStateStream(Empty request,
 			IServerStreamWriter<AcquisitionStateReply> responseStream, ServerCallContext context)
 		{
-			var acquisitionStateEnum = (AcquisitionStateReply.Types.AcquisitionStateEnum) Enum.Parse(
-				typeof(AcquisitionStateReply.Types.AcquisitionStateEnum),
-				_acquisitionManager.AcquisitionState.ToString());
-
-			await ResponseStreamHandler(responseStream, context.CancellationToken, _acquisitionStateDictionary,
-				new AcquisitionStateReply {AcquisitionStateEnum = acquisitionStateEnum});
+			await ResponseStreamHandler(responseStream, context.CancellationToken, _acquisitionStateDictionary);
 		}
 
-		public override async Task AcquisitionCompletionState(AcquisitionCompletionStateRequest request,
+		public override async Task GetAcquisitionCompletionStateStream(Empty request,
 			IServerStreamWriter<AcquisitionCompletionStateReply> responseStream, ServerCallContext context)
 		{
-			var acquisitionCompletionStateEnum =
-				(AcquisitionCompletionStateReply.Types.AcquisitionCompletionStateEnum) Enum.Parse(
-					typeof(AcquisitionCompletionStateReply.Types.AcquisitionCompletionStateEnum),
-					_acquisitionManager.AcquisitionCompletionState.ToString());
-
 			await ResponseStreamHandler(responseStream, context.CancellationToken,
-				_acquisitionCompletionStateDictionary,
-				new AcquisitionCompletionStateReply {AcquisitionCompletionStateEnum = acquisitionCompletionStateEnum});
+				_acquisitionCompletionStateDictionary);
 		}
 
 		private static async Task ServerStreamWriteAsync<T>(IServerStreamWriter<T> serverStream,
@@ -120,7 +126,7 @@ namespace Ipc.Server
 
 		private static async Task ResponseStreamHandler<T>(IServerStreamWriter<T> serverStream,
 			CancellationToken cancellationToken,
-			ConcurrentDictionary<Guid, Tuple<IServerStreamWriter<T>, SemaphoreSlim>> dictionary, T serverStreamItem)
+			ConcurrentDictionary<Guid, Tuple<IServerStreamWriter<T>, SemaphoreSlim>> dictionary)
 		{
 			using (var semaphoreSlim = new SemaphoreSlim(0, 1))
 			{
@@ -128,9 +134,6 @@ namespace Ipc.Server
 				if (!dictionary.TryAdd(newGuid,
 					new Tuple<IServerStreamWriter<T>, SemaphoreSlim>(serverStream, semaphoreSlim)))
 					throw new Exception("Something really wrong!");
-
-				// Send initial state
-				await ServerStreamWriteAsync(serverStream, semaphoreSlim, serverStreamItem);
 
 				try
 				{
@@ -154,6 +157,29 @@ namespace Ipc.Server
 		{
 			foreach (var tuple in dictionary)
 				await ServerStreamWriteAsync(tuple.Value.Item1, tuple.Value.Item2, serverStreamItem);
+		}
+
+		public override Task<CurrentSampleNameReply> GetCurrentSampleName(Empty request, ServerCallContext context)
+		{
+			return Task.FromResult(new CurrentSampleNameReply
+				{CurrentSampleName = _acquisitionManager.CurrentSampleName});
+		}
+
+		public override Task<AcquisitionStateReply> GetAcquisitionState(Empty request, ServerCallContext context)
+		{
+			var acquisitionStateEnum = ConvertToAcquisitionStateEnum(_acquisitionManager.AcquisitionState);
+
+			return Task.FromResult(new AcquisitionStateReply {AcquisitionStateEnum = acquisitionStateEnum});
+		}
+
+		public override Task<AcquisitionCompletionStateReply> GetAcquisitionCompletionState(Empty request,
+			ServerCallContext context)
+		{
+			var acquisitionCompletionStateEnum =
+				ConvertToAcquisitionCompletionStateEnum(_acquisitionManager.AcquisitionCompletionState);
+
+			return Task.FromResult(new AcquisitionCompletionStateReply
+				{AcquisitionCompletionStateEnum = acquisitionCompletionStateEnum});
 		}
 	}
 }

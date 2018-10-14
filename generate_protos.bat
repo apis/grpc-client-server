@@ -1,29 +1,14 @@
-@rem Copyright 2016 gRPC authors.
-@rem
-@rem Licensed under the Apache License, Version 2.0 (the "License");
-@rem you may not use this file except in compliance with the License.
-@rem You may obtain a copy of the License at
-@rem
-@rem     http://www.apache.org/licenses/LICENSE-2.0
-@rem
-@rem Unless required by applicable law or agreed to in writing, software
-@rem distributed under the License is distributed on an "AS IS" BASIS,
-@rem WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-@rem See the License for the specific language governing permissions and
-@rem limitations under the License.
-
-@rem Generate the C# code for .proto files
-
 setlocal
 
 @rem enter this directory
 cd /d %~dp0
 
 @rem packages will be available in nuget cache directory once the project is built or after "dotnet restore"
-set PROTOC=%UserProfile%\.nuget\packages\grpc.tools\1.15.0\tools\windows_x64\protoc.exe
-set PLUGIN=%UserProfile%\.nuget\packages\grpc.tools\1.15.0\tools\windows_x64\grpc_csharp_plugin.exe
+set protobuf_tools=%UserProfile%\.nuget\packages\google.protobuf.tools\3.6.1\tools
+set PROTOC=%protobuf_tools%\windows_x64\protoc.exe
+set grpc_tools=%UserProfile%\.nuget\packages\grpc.tools\1.15.0\tools
+set PLUGIN=%grpc_tools%\windows_x64\grpc_csharp_plugin.exe
 
-
-%PROTOC% -IIpc.Definitions --csharp_out Ipc.Definitions  Ipc.Definitions/AcquisitionManagerService.proto --grpc_out Ipc.Definitions --plugin=protoc-gen-grpc=%PLUGIN%
+%PROTOC% -IIpc.Definitions -I%protobuf_tools% --csharp_out Ipc.Definitions  Ipc.Definitions/AcquisitionManagerService.proto --grpc_out Ipc.Definitions --plugin=protoc-gen-grpc=%PLUGIN%
 
 endlocal
