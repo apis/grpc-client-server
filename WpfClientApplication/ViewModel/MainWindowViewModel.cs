@@ -1,7 +1,8 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Text.RegularExpressions;
 using System.Windows;
-using System.Windows.Input;
 using AcquisitionManager;
 
 namespace WpfClientApplication.ViewModel
@@ -13,11 +14,14 @@ namespace WpfClientApplication.ViewModel
 		private AcquisitionState _acquisitionState;
 
 		private string _currentSampleName;
+		private string _sampleName;
+		private const string RegexPattern = @"^\s*(\S.*)(\d+)\s*$";
 
 		public MainWindowViewModel()
 		{
 			StartCommand = new RelayCommand(OnStartCommand, OnCanStartCommand);
 			StopCommand = new RelayCommand(OnStopCommand, OnCanStopCommand);
+			SampleName = "Remote Sample 1";
 
 			_acquisitionManager = ServiceLocator.Instance.GetService<IAcquisitionManager>();
 
@@ -33,6 +37,16 @@ namespace WpfClientApplication.ViewModel
 		public RelayCommand StartCommand { get; }
 
 		public RelayCommand StopCommand { get; }
+
+		public string SampleName
+		{
+			get => _sampleName;
+			set
+			{
+				_sampleName = value;
+				OnPropertyChanged();
+			}
+		}
 
 		public string CurrentSampleName
 		{
@@ -77,6 +91,17 @@ namespace WpfClientApplication.ViewModel
 		private void OnAcquisitionManagerAcquisitionStateEvent(object sender, EventArgs<AcquisitionState> eventArgs)
 		{
 			AcquisitionState = eventArgs.Parameter;
+
+			if (eventArgs.Parameter == AcquisitionState.Idle)
+			{
+				var regex = new Regex(RegexPattern, RegexOptions.RightToLeft);
+				var match = regex.Match(SampleName);
+
+				if (match.Groups.Count != 3)
+					return;
+
+				SampleName = match.Groups[1].Value + (Convert.ToInt32(match.Groups[2].Value) + 1);
+			}
 		}
 
 		private void OnAcquisitionManagerCurrentSampleNameEvent(object sender, EventArgs<string> eventArgs)
@@ -107,7 +132,7 @@ namespace WpfClientApplication.ViewModel
 
 		private void OnStartCommand(object parameter)
 		{
-			if (_acquisitionManager.Start("ZZZZ"))
+			if (_acquisitionManager.Start(SampleName))
 				return;
 
 			MessageBox.Show("Can't start sample!\nPossibly sample is running already.",

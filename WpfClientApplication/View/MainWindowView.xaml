@@ -10,9 +10,10 @@
         <viewModel:MainWindowViewModel />
     </Window.DataContext>
 
-    <Border BorderThickness="1" BorderBrush="Blue" Margin="5">
+    <Border BorderThickness="1" BorderBrush="LightBlue" Margin="10">
         <Grid>
             <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
@@ -23,21 +24,35 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
-            <Button Grid.Row="0" Grid.Column="0" Margin="5, 10, 5, 10" Width="100" Height="36" FontSize="16" Command="{Binding StartCommand}">Start</Button>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Margin="5, 10, 5, 10">
+                <TextBlock FontSize="18" Margin="0, 3, 5, 0">Sample Name:</TextBlock>
+                <TextBox Foreground="Blue" Text="{Binding SampleName}" Width="300" FontSize="18" />
+            </StackPanel>
+            
+            <Button Grid.Row="1" Grid.Column="0" Margin="5, 0, 5, 10" Width="100" Height="36" FontSize="16"
+                    Command="{Binding StartCommand}">
+                Start
+            </Button>
 
-            <Button Grid.Row="0" Grid.Column="1" Margin="5, 10, 5, 10" Width="100" Height="36" FontSize="16" Command="{Binding StopCommand}">Stop</Button>
+            <Button Grid.Row="1" Grid.Column="1" Margin="5, 10, 5, 10" Width="100" Height="36" FontSize="16"
+                    Command="{Binding StopCommand}">
+                Stop
+            </Button>
 
-            <TextBlock HorizontalAlignment="Center" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Margin="5, 0, 5, 10" FontSize="18">
+            <TextBlock HorizontalAlignment="Center" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
+                       Margin="5, 30, 5, 10" FontSize="18">
                 <Run>Current Sample Name:</Run>
-                <Run Text="{Binding CurrentSampleName}" Foreground="Green"/>
+                <Run Text="{Binding CurrentSampleName}" Foreground="Green" />
             </TextBlock>
 
-            <TextBlock HorizontalAlignment="Center" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Margin="5, 0, 5, 10" FontSize="18">
+            <TextBlock HorizontalAlignment="Center" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2"
+                       Margin="5, 0, 5, 10" FontSize="18">
                 <Run>Acquisition State:</Run>
                 <Run Text="{Binding AcquisitionState}" Foreground="Green" />
             </TextBlock>
 
-            <TextBlock HorizontalAlignment="Center" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Margin="5, 0, 5, 0" FontSize="18">
+            <TextBlock HorizontalAlignment="Center" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2"
+                       Margin="5, 0, 5, 0" FontSize="18">
                 <Run>Acquisition Completion State:</Run>
                 <Run Text="{Binding AcquisitionCompletionState}" Foreground="Green" />
             </TextBlock>
