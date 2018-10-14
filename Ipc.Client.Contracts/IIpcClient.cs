@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Threading;
 
 namespace Ipc.Client
 {
@@ -13,5 +9,7 @@ namespace Ipc.Client
 		void Stop();
 
 		object Channel { get; }
+
+		CancellationToken CancellationToken { get; }
 	}
 }

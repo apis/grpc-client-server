@@ -16,26 +16,28 @@ namespace Ipc.Client
 
 		private readonly AcquisitionManagerService.AcquisitionManagerServiceClient _acquisitionManagerServiceClient;
 
-		public AcquisitionManagerProxyImplementation(object channel)
+		public AcquisitionManagerProxyImplementation(object channel, CancellationToken cancellationToken)
 		{
 			_acquisitionManagerServiceClient = new AcquisitionManagerService.AcquisitionManagerServiceClient((Channel)channel);
 
-			GetCurrentSampleNameAsync(_acquisitionManagerServiceClient);
-			GetAcquisitionStateAsync(_acquisitionManagerServiceClient);
-			AcquisitionCompletionStateAsync(_acquisitionManagerServiceClient);
+			GetCurrentSampleNameAsync(_acquisitionManagerServiceClient, cancellationToken);
+			GetAcquisitionStateAsync(_acquisitionManagerServiceClient, cancellationToken);
+			AcquisitionCompletionStateAsync(_acquisitionManagerServiceClient, cancellationToken);
 		}
 
 		public bool Start(string sampleName)
 		{
+			Log.DebugFormat("Begin Start({0})", sampleName);
 			var startReply = _acquisitionManagerServiceClient.Start(new StartRequest {SampleName = sampleName});
-			Log.DebugFormat("Start({0}) => {1}", sampleName, startReply.Result);
+			Log.DebugFormat("End Start() => {0}", startReply.Result);
 			return startReply.Result;
 		}
 
 		public bool Stop()
 		{
+			Log.DebugFormat("Begin Stop()");
 			var stopReply = _acquisitionManagerServiceClient.Stop(new StopRequest());
-			Log.DebugFormat("Stop() => {0}", stopReply.Result);
+			Log.DebugFormat("End Stop() => {0}", stopReply.Result);
 			return stopReply.Result;
 		}
 
@@ -43,9 +45,12 @@ namespace Ipc.Client
 		{
 			get
 			{
-				var currentSampleNameReply =
-					_acquisitionManagerServiceClient.GetCurrentSampleName(new Empty());
-				Log.DebugFormat("get CurrentSampleName: {0}", currentSampleNameReply.CurrentSampleName);
+				Log.DebugFormat("Begin get CurrentSampleName()");
+
+				var currentSampleNameReply = _acquisitionManagerServiceClient.GetCurrentSampleName(new Empty());
+
+				Log.DebugFormat("End get CurrentSampleName() => {0}", currentSampleNameReply.CurrentSampleName);
+
 				return currentSampleNameReply.CurrentSampleName;
 			}
 		}
@@ -54,12 +59,15 @@ namespace Ipc.Client
 		{
 			get
 			{
+				Log.DebugFormat("Begin get AcquisitionState()");
+
 				var acquisitionStateReply =
 					_acquisitionManagerServiceClient.GetAcquisitionState(new Empty());
+
 				var acquisitionState =
 					ConvertToAcquisitionState(acquisitionStateReply.AcquisitionStateEnum);
 
-				Log.DebugFormat("get AcquisitionState: {0}", acquisitionState);
+				Log.DebugFormat("End get AcquisitionState() => {0}", acquisitionState);
 
 				return acquisitionState;
 			}
@@ -69,13 +77,16 @@ namespace Ipc.Client
 		{
 			get
 			{
+				Log.DebugFormat("Begin get AcquisitionCompletionState()");
+
 				var acquisitionCompletionStateReply =
 					_acquisitionManagerServiceClient.GetAcquisitionCompletionState(
 						new Empty());
+
 				var acquisitionCompletionState =
 					ConvertToAcquisitionCompletionState(acquisitionCompletionStateReply.AcquisitionCompletionStateEnum);
 
-				Log.DebugFormat("get AcquisitionCompletionState: {0}", acquisitionCompletionState);
+				Log.DebugFormat("End get AcquisitionCompletionState() => {0}", acquisitionCompletionState);
 
 				return acquisitionCompletionState;
 			}
@@ -85,69 +96,86 @@ namespace Ipc.Client
 		public event EventHandler<EventArgs<AcquisitionState>> AcquisitionStateEvent;
 		public event EventHandler<EventArgs<AcquisitionCompletionState>> AcquisitionCompletionStateEvent;
 
-
 		public async void GetCurrentSampleNameAsync(
-			AcquisitionManagerService.AcquisitionManagerServiceClient client)
+			AcquisitionManagerService.AcquisitionManagerServiceClient client, CancellationToken cancellationToken)
 		{
 			try
 			{
+				Log.DebugFormat("Begin stream event CurrentSampleName()");
+
 				using (var call = client.GetCurrentSampleNameStream(new Empty()))
 				{
 					var responseStream = call.ResponseStream;
 
-					while (await responseStream.MoveNext(default(CancellationToken)))
+					while (await responseStream.MoveNext(cancellationToken))
 					{
 						var currentSampleNameReply = responseStream.Current;
-						Log.DebugFormat("event CurrentSampleName: {0}", currentSampleNameReply.CurrentSampleName);
+						Log.DebugFormat("event CurrentSampleName() => {0}", currentSampleNameReply.CurrentSampleName);
 						CurrentSampleNameEvent?.Invoke(this,
 							new EventArgs<string>(currentSampleNameReply.CurrentSampleName));
 					}
 				}
+
+				Log.DebugFormat("End stream event CurrentSampleName()");
 			}
 			catch (RpcException exception)
 			{
-				Log.Error("event CurrentSampleName", exception);
+				Log.Error("Error in stream event CurrentSampleName()", exception);
+			}
+			catch (OperationCanceledException)
+			{
+				Log.DebugFormat("End stream event CurrentSampleName() by cancelling it");
 			}
 		}
 
 		public async void GetAcquisitionStateAsync(
-			AcquisitionManagerService.AcquisitionManagerServiceClient client)
+			AcquisitionManagerService.AcquisitionManagerServiceClient client, CancellationToken cancellationToken)
 		{
 			try
 			{
+				Log.DebugFormat("Begin stream event AcquisitionState()");
+
 				using (var call = client.GetAcquisitionStateStream(new Empty()))
 				{
 					var responseStream = call.ResponseStream;
 
-					while (await responseStream.MoveNext(default(CancellationToken)))
+					while (await responseStream.MoveNext(cancellationToken))
 					{
 						var acquisitionStateReply = responseStream.Current;
 						var acquisitionState =
 							ConvertToAcquisitionState(acquisitionStateReply.AcquisitionStateEnum);
 
-						Log.DebugFormat("event AcquisitionState: {0}", acquisitionState);
+						Log.DebugFormat("event AcquisitionState() => {0}", acquisitionState);
 
 						AcquisitionStateEvent?.Invoke(this, new EventArgs<AcquisitionState>(acquisitionState));
 					}
 				}
+
+				Log.DebugFormat("End stream event AcquisitionState()");
 			}
 			catch (RpcException exception)
 			{
-				Log.Error("event AcquisitionState", exception);
+				Log.Error("Error in stream event AcquisitionState()", exception);
+			}
+			catch (OperationCanceledException)
+			{
+				Log.DebugFormat("End stream event AcquisitionState() by cancelling it");
 			}
 		}
 
 		public async void AcquisitionCompletionStateAsync(
-			AcquisitionManagerService.AcquisitionManagerServiceClient client)
+			AcquisitionManagerService.AcquisitionManagerServiceClient client, CancellationToken cancellationToken)
 		{
 			try
 			{
+				Log.DebugFormat("Begin stream event AcquisitionCompletionState()");
+
 				using (var call =
 					client.GetAcquisitionCompletionStateStream(new Empty()))
 				{
 					var responseStream = call.ResponseStream;
 
-					while (await responseStream.MoveNext(default(CancellationToken)))
+					while (await responseStream.MoveNext(cancellationToken))
 					{
 						var acquisitionCompletionStateReply = responseStream.Current;
 
@@ -155,16 +183,22 @@ namespace Ipc.Client
 							ConvertToAcquisitionCompletionState(acquisitionCompletionStateReply
 								.AcquisitionCompletionStateEnum);
 
-						Log.DebugFormat("event AcquisitionCompletionState: {0}", acquisitionCompletionState);
+						Log.DebugFormat("event AcquisitionCompletionState() => {0}", acquisitionCompletionState);
 
 						AcquisitionCompletionStateEvent?.Invoke(this,
 							new EventArgs<AcquisitionCompletionState>(acquisitionCompletionState));
 					}
 				}
+
+				Log.DebugFormat("End stream event AcquisitionCompletionState()");
 			}
 			catch (RpcException exception)
 			{
-				Log.Error("event AcquisitionCompletionState", exception);
+				Log.Error("Error in stream event AcquisitionCompletionState()", exception);
+			}
+			catch (OperationCanceledException)
+			{
+				Log.DebugFormat("End stream event AcquisitionCompletionState() by cancelling it");
 			}
 		}
 

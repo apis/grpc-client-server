@@ -62,7 +62,7 @@
     <Compile Include="IServiceLocator.cs" />
     <Compile Include="ServiceLocator.cs" />
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
-    <Compile Include="ViewModel\SimpleDelegateCommand.cs" />
+    <Compile Include="ViewModel\RelayCommand.cs" />
     <Compile Include="View\MainWindowView.xaml.cs">
       <DependentUpon>MainWindowView.xaml</DependentUpon>
       <SubType>Code</SubType>

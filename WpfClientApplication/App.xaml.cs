@@ -19,7 +19,7 @@ namespace WpfClientApplication
 			_ipcClient = new IpcClientImplementation();
 			_ipcClient.Start();
 
-			ServiceLocator.Instance.RegisterService<IAcquisitionManager>(new AcquisitionManagerProxyImplementation(_ipcClient.Channel));
+			ServiceLocator.Instance.RegisterService<IAcquisitionManager>(new AcquisitionManagerProxyImplementation(_ipcClient.Channel, _ipcClient.CancellationToken));
 		}
 
 		private void OnAppExit(object sender, ExitEventArgs eventArgs)

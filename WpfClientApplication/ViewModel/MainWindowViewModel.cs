@@ -16,8 +16,8 @@ namespace WpfClientApplication.ViewModel
 
 		public MainWindowViewModel()
 		{
-			StartCommand = new SimpleDelegateCommand(OnStartCommand, OnCanStartCommand);
-			StopCommand = new SimpleDelegateCommand(OnStopCommand, OnCanStopCommand);
+			StartCommand = new RelayCommand(OnStartCommand, OnCanStartCommand);
+			StopCommand = new RelayCommand(OnStopCommand, OnCanStopCommand);
 
 			_acquisitionManager = ServiceLocator.Instance.GetService<IAcquisitionManager>();
 
@@ -30,9 +30,9 @@ namespace WpfClientApplication.ViewModel
 			AcquisitionCompletionState = _acquisitionManager.AcquisitionCompletionState;
 		}
 
-		public ICommand StartCommand { get; }
+		public RelayCommand StartCommand { get; }
 
-		public ICommand StopCommand { get; }
+		public RelayCommand StopCommand { get; }
 
 		public string CurrentSampleName
 		{
@@ -50,6 +50,8 @@ namespace WpfClientApplication.ViewModel
 			set
 			{
 				_acquisitionState = value;
+				StartCommand.RaiseCanExecuteChanged();
+				StopCommand.RaiseCanExecuteChanged();
 				OnPropertyChanged();
 			}
 		}
@@ -82,12 +84,12 @@ namespace WpfClientApplication.ViewModel
 			CurrentSampleName = eventArgs.Parameter;
 		}
 
-		private bool OnCanStopCommand(object arg)
+		private bool OnCanStopCommand()
 		{
 			return AcquisitionState == AcquisitionState.Running;
 		}
 
-		private void OnStopCommand(object obj)
+		private void OnStopCommand(object parameter)
 		{
 			if (_acquisitionManager.Stop())
 				return;
@@ -98,12 +100,12 @@ namespace WpfClientApplication.ViewModel
 				MessageBoxImage.Exclamation);
 		}
 
-		private bool OnCanStartCommand(object arg)
+		private bool OnCanStartCommand()
 		{
 			return AcquisitionState == AcquisitionState.Idle;
 		}
 
-		private void OnStartCommand(object obj)
+		private void OnStartCommand(object parameter)
 		{
 			if (_acquisitionManager.Start("ZZZZ"))
 				return;
