@@ -1,0 +1,59 @@
+syntax = "proto3";
+
+import "google/protobuf/empty.proto";
+
+option csharp_namespace = "Ipc.Definitions";
+
+package ipc_definitions;
+
+service AcquisitionManagerService {
+	rpc Start (StartRequest) returns (StartReply) {}
+	rpc Stop (StopRequest) returns (StopReply) {}
+	rpc GetCurrentSampleName (google.protobuf.Empty) returns (CurrentSampleNameReply) {}
+	rpc GetCurrentSampleNameStream (google.protobuf.Empty) returns (stream CurrentSampleNameReply) {}
+	rpc GetAcquisitionState (google.protobuf.Empty) returns (AcquisitionStateReply) {}
+	rpc GetAcquisitionStateStream (google.protobuf.Empty) returns (stream AcquisitionStateReply) {}
+	rpc GetAcquisitionCompletionState (google.protobuf.Empty) returns (AcquisitionCompletionStateReply) {}
+	rpc GetAcquisitionCompletionStateStream (google.protobuf.Empty) returns (stream AcquisitionCompletionStateReply) {}
+}
+
+message StartRequest {
+	string sampleName = 1;
+}
+
+message StopRequest {
+}
+
+message StartReply {
+	bool result = 1;
+}
+
+message StopReply {
+	bool result = 1;
+}
+
+message CurrentSampleNameReply {
+	string currentSampleName = 1;
+}
+
+message AcquisitionStateReply {
+
+	enum AcquisitionStateEnum {
+		IDLE = 0;
+		RUNNING = 1;
+	}
+
+	AcquisitionStateEnum acquisitionStateEnum = 1;
+}
+
+message AcquisitionCompletionStateReply {
+
+	enum AcquisitionCompletionStateEnum {
+		INCOMPLETE = 0;
+		STOPPED = 1;
+		FAILED = 2;
+		SUCCESSFULLY_COMPLETED = 3;
+	}
+
+	AcquisitionCompletionStateEnum acquisitionCompletionStateEnum = 1;
+}

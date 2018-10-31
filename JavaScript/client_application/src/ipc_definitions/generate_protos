@@ -1,0 +1,15 @@
+# Test
+#
+
+# /* eslint-disable */
+
+# sudo docker build -t envoy:new .
+# sudo docker run -d --name envoy -p 9901:9901 -p 11972:11973 envoy:new
+
+
+DIR=.
+OUT_DIR=.
+
+protoc -I=$DIR AcquisitionManagerService.proto \
+--js_out=import_style=commonjs:$OUT_DIR \
+--grpc-web_out=import_style=commonjs,mode=grpcwebtext:$OUT_DIR
