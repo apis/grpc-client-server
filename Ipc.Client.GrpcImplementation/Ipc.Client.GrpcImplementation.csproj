@@ -8,7 +8,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Ipc.Client</RootNamespace>
-    <AssemblyName>Ipc.Client.Implementation</AssemblyName>
+    <AssemblyName>Ipc.Client.GrpcImplementation</AssemblyName>
     <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -36,8 +36,8 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AcquisitionManagerProxyImplementation.cs" />
-    <Compile Include="IpcClientImplementation.cs" />
+    <Compile Include="AcquisitionManagerProxyGrpcImplementation.cs" />
+    <Compile Include="IpcClientGrpcImplementation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -14,15 +14,34 @@ namespace WpfClientApplication
 			XmlConfigurator.Configure();
 		}
 
-		private void OnaAppStartup(object sender, StartupEventArgs eventArgs)
+		private void OnStartup(object sender, StartupEventArgs eventArgs)
 		{
-			_ipcClient = new IpcClientImplementation();
+			_ipcClient = CreateGrpcClient();
 			_ipcClient.Start();
 
-			ServiceLocator.Instance.RegisterService<IAcquisitionManager>(new AcquisitionManagerProxyImplementation(_ipcClient.Channel, _ipcClient.CancellationToken));
+			var acquisitionManagerProxy = CreateGrpcAcquisitionManagerProxy(_ipcClient);
+
+			ServiceLocator.Instance.RegisterService<IAcquisitionManager>(acquisitionManagerProxy);
 		}
 
-		private void OnAppExit(object sender, ExitEventArgs eventArgs)
+		private IIpcClient CreateGrpcClient()
+		{
+			var grpcClientImplementation = new IpcClientGrpcImplementation();
+			return grpcClientImplementation;
+		}
+
+		private IAcquisitionManager CreateGrpcAcquisitionManagerProxy(IIpcClient ipcClient)
+		{
+			var grpcClientImplementation = (IpcClientGrpcImplementation) ipcClient;
+
+			var grpcAcquisitionManagerProxyImplementation = new AcquisitionManagerProxyGrpcImplementation(
+				grpcClientImplementation.Channel,
+				grpcClientImplementation.CancellationToken);
+
+			return grpcAcquisitionManagerProxyImplementation;
+		}
+
+		private void OnExit(object sender, ExitEventArgs eventArgs)
 		{
 			_ipcClient.Stop();
 		}

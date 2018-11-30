@@ -7,9 +7,5 @@ namespace Ipc.Client
 		void Start();
 
 		void Stop();
-
-		object Channel { get; }
-
-		CancellationToken CancellationToken { get; }
 	}
 }

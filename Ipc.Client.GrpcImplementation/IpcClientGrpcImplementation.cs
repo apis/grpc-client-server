@@ -8,7 +8,7 @@ using log4net;
 
 namespace Ipc.Client
 {
-	public class IpcClientImplementation : IIpcClient
+	public class IpcClientGrpcImplementation : IIpcClient
 	{
 		private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
@@ -19,7 +19,7 @@ namespace Ipc.Client
 		private Channel _channel;
 		private CancellationTokenSource _cancellationTokenSource;
 
-		public IpcClientImplementation()
+		public IpcClientGrpcImplementation()
 		{
 			ParseConfiguration();
 
@@ -41,7 +41,7 @@ namespace Ipc.Client
 			Log.Debug("Stop()");
 		}
 
-		public object Channel => _channel;
+		public Channel Channel => _channel;
 
 		public CancellationToken CancellationToken => _cancellationTokenSource.Token;
 

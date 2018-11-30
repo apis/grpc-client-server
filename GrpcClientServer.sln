@@ -15,7 +15,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ipc.Server.GrpcImplementati
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ipc.Server.Contracts", "Ipc.Server.Contracts\Ipc.Server.Contracts.csproj", "{A19250FF-4249-45A4-AEAE-16050FCA2BB4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ipc.Client.Implementation", "Ipc.Client.Implementation\Ipc.Client.Implementation.csproj", "{5619A831-2348-4D6C-9928-BC160391C464}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ipc.Client.GrpcImplementation", "Ipc.Client.GrpcImplementation\Ipc.Client.GrpcImplementation.csproj", "{5619A831-2348-4D6C-9928-BC160391C464}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ipc.Client.Contracts", "Ipc.Client.Contracts\Ipc.Client.Contracts.csproj", "{3FEA55F8-0955-4A86-9B16-6EDC47EB0340}"
 EndProject

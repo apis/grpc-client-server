@@ -16,8 +16,11 @@ namespace ServerApplication
 			PrintAcquisitionCompletionState(acquisitionManager.AcquisitionCompletionState);
 			PrintCurrentSampleName(acquisitionManager.CurrentSampleName);
 
-			var grpcServer = StartGrpcServer(acquisitionManager);
-			var azureServer = StartAzureServer(acquisitionManager);
+			var grpcServer = CreateGrpcServer(acquisitionManager);
+			grpcServer.Start();
+
+			var azureServer = CreateAzureServer(acquisitionManager);
+			azureServer.Start();
 
 			Console.WriteLine("Press any key to stop the server...");
 			Console.ReadKey();
@@ -26,17 +29,15 @@ namespace ServerApplication
 			azureServer.Stop();
 		}
 
-		private static IIpcServer StartGrpcServer(IAcquisitionManager acquisitionManager)
+		private static IIpcServer CreateGrpcServer(IAcquisitionManager acquisitionManager)
 		{
 			IIpcServer server = new IpcServerGrpcImplementation(acquisitionManager);
-			server.Start();
 			return server;
 		}
 
-		private static IIpcServer StartAzureServer(IAcquisitionManager acquisitionManager)
+		private static IIpcServer CreateAzureServer(IAcquisitionManager acquisitionManager)
 		{
 			IIpcServer server = new IpcServerAzureImplementation(acquisitionManager);
-			server.Start();
 			return server;
 		}
 

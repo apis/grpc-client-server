@@ -10,15 +10,15 @@ using Enum = System.Enum;
 
 namespace Ipc.Client
 {
-	public class AcquisitionManagerProxyImplementation : IAcquisitionManager
+	public class AcquisitionManagerProxyGrpcImplementation : IAcquisitionManager
 	{
 		private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
 		private readonly AcquisitionManagerService.AcquisitionManagerServiceClient _acquisitionManagerServiceClient;
 
-		public AcquisitionManagerProxyImplementation(object channel, CancellationToken cancellationToken)
+		public AcquisitionManagerProxyGrpcImplementation(Channel channel, CancellationToken cancellationToken)
 		{
-			_acquisitionManagerServiceClient = new AcquisitionManagerService.AcquisitionManagerServiceClient((Channel)channel);
+			_acquisitionManagerServiceClient = new AcquisitionManagerService.AcquisitionManagerServiceClient(channel);
 
 			GetCurrentSampleNameAsync(_acquisitionManagerServiceClient, cancellationToken);
 			GetAcquisitionStateAsync(_acquisitionManagerServiceClient, cancellationToken);

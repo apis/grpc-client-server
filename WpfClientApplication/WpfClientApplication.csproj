@@ -103,9 +103,9 @@
       <Project>{3fea55f8-0955-4a86-9b16-6edc47eb0340}</Project>
       <Name>Ipc.Client.Contracts</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Ipc.Client.Implementation\Ipc.Client.Implementation.csproj">
+    <ProjectReference Include="..\Ipc.Client.GrpcImplementation\Ipc.Client.GrpcImplementation.csproj">
       <Project>{5619a831-2348-4d6c-9928-bc160391c464}</Project>
-      <Name>Ipc.Client.Implementation</Name>
+      <Name>Ipc.Client.GrpcImplementation</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
