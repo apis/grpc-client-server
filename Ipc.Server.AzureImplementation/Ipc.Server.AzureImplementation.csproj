@@ -4,17 +4,16 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{BF1C98B4-5379-4D25-A034-298F71E42B30}</ProjectGuid>
-    <OutputType>Exe</OutputType>
-    <RootNamespace>ServerApplication</RootNamespace>
-    <AssemblyName>ServerApplication</AssemblyName>
+    <ProjectGuid>{A16BACD1-4485-4128-AB09-6C9170B96133}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Ipc.Server</RootNamespace>
+    <AssemblyName>Ipc.Server.AzureImplementation</AssemblyName>
     <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -24,7 +23,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>..\output\bin\Release\</OutputPath>
@@ -32,41 +30,40 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <PropertyGroup>
-    <StartupObject>ServerApplication.Program</StartupObject>
-  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Program.cs" />
+    <Compile Include="IpcServerAzureImplementation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\AcquisitionManager.Contracts\AcquisitionManager.Contracts.csproj">
-      <Project>{b8b3d8f5-4a66-445c-932c-90004a3a81b4}</Project>
+      <Project>{B8B3D8F5-4A66-445C-932C-90004A3A81B4}</Project>
       <Name>AcquisitionManager.Contracts</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\AcquisitionManager\AcquisitionManager.Implementation.csproj">
-      <Project>{437e4df6-1a80-4e0d-bcb2-0bbf0f4d2a1a}</Project>
-      <Name>AcquisitionManager.Implementation</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Ipc.Server.AzureImplementation\Ipc.Server.AzureImplementation.csproj">
-      <Project>{A16BACD1-4485-4128-AB09-6C9170B96133}</Project>
-      <Name>Ipc.Server.AzureImplementation</Name>
     </ProjectReference>
     <ProjectReference Include="..\Ipc.Server.Contracts\Ipc.Server.Contracts.csproj">
       <Project>{a19250ff-4249-45a4-aeae-16050fca2bb4}</Project>
       <Name>Ipc.Server.Contracts</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Ipc.Server.GrpcImplementation\Ipc.Server.GrpcImplementation.csproj">
-      <Project>{595bf2ba-7c67-4e50-8989-15d6e0931966}</Project>
-      <Name>Ipc.Server.GrpcImplementation</Name>
-    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="log4net">
+      <Version>2.0.8</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Azure.Devices.Client">
+      <Version>1.18.1</Version>
+    </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

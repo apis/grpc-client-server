@@ -16,13 +16,28 @@ namespace ServerApplication
 			PrintAcquisitionCompletionState(acquisitionManager.AcquisitionCompletionState);
 			PrintCurrentSampleName(acquisitionManager.CurrentSampleName);
 
-			IIpcServer server = new IpcServerImplementation(acquisitionManager);
-			server.Start();
+			var grpcServer = StartGrpcServer(acquisitionManager);
+			var azureServer = StartAzureServer(acquisitionManager);
 
 			Console.WriteLine("Press any key to stop the server...");
 			Console.ReadKey();
 
-			server.Stop();
+			grpcServer.Stop();
+			azureServer.Stop();
+		}
+
+		private static IIpcServer StartGrpcServer(IAcquisitionManager acquisitionManager)
+		{
+			IIpcServer server = new IpcServerGrpcImplementation(acquisitionManager);
+			server.Start();
+			return server;
+		}
+
+		private static IIpcServer StartAzureServer(IAcquisitionManager acquisitionManager)
+		{
+			IIpcServer server = new IpcServerAzureImplementation(acquisitionManager);
+			server.Start();
+			return server;
 		}
 
 		private static void OnCurrentSampleNameEvent(object sender, EventArgs<string> eventArgs)

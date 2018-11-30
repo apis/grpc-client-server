@@ -6,12 +6,13 @@ using System.Linq;
 using System.Reflection;
 using AcquisitionManager;
 using Grpc.Core;
+using Grpc.Core.Interceptors;
 using Ipc.Definitions;
 using log4net;
 
 namespace Ipc.Server
 {
-	public class IpcServerImplementation : IIpcServer
+	public class IpcServerGrpcImplementation : IIpcServer
 	{
 		private const string HostKey = "Host";
 		private const string PortKey = "Port";
@@ -22,7 +23,7 @@ namespace Ipc.Server
 
 		private Grpc.Core.Server _server;
 
-		public IpcServerImplementation(IAcquisitionManager acquisitionManager)
+		public IpcServerGrpcImplementation(IAcquisitionManager acquisitionManager)
 		{
 			_acquisitionManager = acquisitionManager;
 			ParseConfiguration();
@@ -38,6 +39,7 @@ namespace Ipc.Server
 				Services =
 				{
 					AcquisitionManagerService.BindService(
+//						new AcquisitionManagerServiceImplementation(_acquisitionManager)).Intercept(new MyInterceptor())
 						new AcquisitionManagerServiceImplementation(_acquisitionManager))
 				}
 			};

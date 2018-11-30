@@ -8,7 +8,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Ipc.Server</RootNamespace>
-    <AssemblyName>Ipc.Server.Implementation</AssemblyName>
+    <AssemblyName>Ipc.Server.GrpcImplementation</AssemblyName>
     <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -36,8 +36,9 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IpcServerImplementation.cs" />
+    <Compile Include="IpcServerGrpcImplementation.cs" />
     <Compile Include="AcquisitionManagerServiceImplementation.cs" />
+    <Compile Include="MyInterceptor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

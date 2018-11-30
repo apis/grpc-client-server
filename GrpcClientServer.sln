@@ -11,7 +11,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AcquisitionManager.Implemen
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AcquisitionManager.Contracts", "AcquisitionManager.Contracts\AcquisitionManager.Contracts.csproj", "{B8B3D8F5-4A66-445C-932C-90004A3A81B4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ipc.Server.Implementation", "Ipc.Server.Implementation\Ipc.Server.Implementation.csproj", "{595BF2BA-7C67-4E50-8989-15D6E0931966}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ipc.Server.GrpcImplementation", "Ipc.Server.GrpcImplementation\Ipc.Server.GrpcImplementation.csproj", "{595BF2BA-7C67-4E50-8989-15D6E0931966}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ipc.Server.Contracts", "Ipc.Server.Contracts\Ipc.Server.Contracts.csproj", "{A19250FF-4249-45A4-AEAE-16050FCA2BB4}"
 EndProject
@@ -20,6 +20,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ipc.Client.Contracts", "Ipc.Client.Contracts\Ipc.Client.Contracts.csproj", "{3FEA55F8-0955-4A86-9B16-6EDC47EB0340}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfClientApplication", "WpfClientApplication\WpfClientApplication.csproj", "{90C24C14-FFE4-4E19-AB9A-47196952CDBC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ipc.Server.AzureImplementation", "Ipc.Server.AzureImplementation\Ipc.Server.AzureImplementation.csproj", "{A16BACD1-4485-4128-AB09-6C9170B96133}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -63,6 +65,10 @@ Global
 		{90C24C14-FFE4-4E19-AB9A-47196952CDBC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{90C24C14-FFE4-4E19-AB9A-47196952CDBC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{90C24C14-FFE4-4E19-AB9A-47196952CDBC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A16BACD1-4485-4128-AB09-6C9170B96133}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A16BACD1-4485-4128-AB09-6C9170B96133}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A16BACD1-4485-4128-AB09-6C9170B96133}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A16BACD1-4485-4128-AB09-6C9170B96133}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
