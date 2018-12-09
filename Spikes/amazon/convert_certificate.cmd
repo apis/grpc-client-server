@@ -1,0 +1,1 @@
+winpty openssl pkcs12 -export -in ff52451764-certificate.pem.crt -inkey ff52451764-private.pem.key -out ff52451764-certificate.pfx.crt -certfile root.pem.crt
