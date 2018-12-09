@@ -23,13 +23,15 @@ namespace Ipc.Server
 
 		private Grpc.Core.Server _server;
 
-		public IpcServerGrpcImplementation(IAcquisitionManager acquisitionManager)
+		public IpcServerGrpcImplementation(IAcquisitionManager acquisitionManager, int instanceIndex)
 		{
 			_acquisitionManager = acquisitionManager;
 			ParseConfiguration();
 
 			if (_port == -1 || _hosts.Count == 0)
 				throw new Exception("Invalid configuration!");
+
+			_port += instanceIndex;
 		}
 
 		public void Start()
