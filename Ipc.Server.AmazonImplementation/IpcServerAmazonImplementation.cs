@@ -56,6 +56,8 @@ namespace Ipc.Server
 					_deviceCertificate,
 					MqttSslProtocols.TLSv1_2);
 
+				_deviceClient.Connect(_clientId);
+
 				_acquisitionManager.AcquisitionStateEvent += OnAcquisitionStateEvent;
 				_acquisitionManager.AcquisitionCompletionStateEvent += OnAcquisitionCompletionStateEvent;
 				_acquisitionManager.CurrentSampleNameEvent += OnCurrentSampleNameEvent;
