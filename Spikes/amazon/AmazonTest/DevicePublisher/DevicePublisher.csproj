@@ -47,6 +47,12 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="..\..\root.pem.crt">
+      <Link>root.pem.crt</Link>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\ff52451764-certificate.pfx.crt">
+      <Link>ff52451764-certificate.pfx.crt</Link>
+    </EmbeddedResource>
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>

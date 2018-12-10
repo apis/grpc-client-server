@@ -42,14 +42,19 @@ namespace ServerApplication
 			var grpcServer = CreateGrpcServer(acquisitionManager, instanceIndex);
 			grpcServer.Start();
 
-//			var azureServer = CreateAzureServer(acquisitionManager);
-//			azureServer.Start();
+			//			var azureServer = CreateAzureServer(acquisitionManager);
+			//			azureServer.Start();
+
+			var amazonServer = CreateAmazonServer(instanceId, acquisitionManager);
+			amazonServer.Start();
+
 
 			Console.WriteLine("Press any key to stop the server...");
 			Console.ReadKey();
 
 			grpcServer.Stop();
 //			azureServer.Stop();
+			amazonServer.Stop();
 
 			_instanceMutex.Dispose();
 			_instanceMutex = null;
@@ -64,6 +69,12 @@ namespace ServerApplication
 		private static IIpcServer CreateAzureServer(IAcquisitionManager acquisitionManager)
 		{
 			IIpcServer server = new IpcServerAzureImplementation(acquisitionManager);
+			return server;
+		}
+
+		private static IIpcServer CreateAmazonServer(string clientId, IAcquisitionManager acquisitionManager)
+		{
+			IIpcServer server = new IpcServerAmazonImplementation(clientId, acquisitionManager);
 			return server;
 		}
 

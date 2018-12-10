@@ -25,6 +25,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ipc.Server.AzureImplementat
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventHubTest", "EventHubTest\EventHubTest.csproj", "{76226988-7D05-4F09-BFC7-E76374CE189C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ipc.Server.AmazonImplementation", "Ipc.Server.AmazonImplementation\Ipc.Server.AmazonImplementation.csproj", "{AE5098C7-4781-491E-AA4A-4274ED546144}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -75,6 +77,10 @@ Global
 		{76226988-7D05-4F09-BFC7-E76374CE189C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{76226988-7D05-4F09-BFC7-E76374CE189C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{76226988-7D05-4F09-BFC7-E76374CE189C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AE5098C7-4781-491E-AA4A-4274ED546144}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AE5098C7-4781-491E-AA4A-4274ED546144}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AE5098C7-4781-491E-AA4A-4274ED546144}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AE5098C7-4781-491E-AA4A-4274ED546144}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
